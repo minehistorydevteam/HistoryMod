@@ -21,17 +21,17 @@ public class Main {
 
   @EventHandler
   public static void preInit(FMLPreInitializationEvent event) {
-
+    proxy.preInit(event);
   }
 
   @EventHandler
   public static void init(FMLInitializationEvent event) {
-
+    proxy.init(event);
   }
 
   @EventHandler
   public static void postInit(FMLPostInitializationEvent event) {
-
+    proxy.postInit(event);
   }
 }
 
