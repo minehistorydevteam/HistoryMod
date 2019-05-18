@@ -1,14 +1,14 @@
 [
 {
-  "modid": "717174343839347",
-  "name": "Rift",
+  "modid": "historymod",
+  "name": "HistoryMod",
   "description": "Please Work",
-  "version": "$[1.0]",
-  "mcversion": "$[1.12.2]",
+  "version": "1.0",
+  "mcversion": "[1.12.2]",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ScienceNeb"],
-  "credits": "ScienceNeb",
+  "authorList": ["heisluft", "TechnicSmile"],
+  "credits": "moonlit for the textures",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
