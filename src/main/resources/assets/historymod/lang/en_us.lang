@@ -1,2 +1,3 @@
 itemGroup.historymod=HistoryMod
-item.stone_wheel.name=Stone Wheel
+item.historymod.stone_wheel.name=Stone Wheel
+item.historymod.spear.name=Spear
