@@ -2,19 +2,23 @@ package com.historydevteam.historymod.item;
 
 import com.google.common.collect.Multimap;
 import com.historydevteam.historymod.util.Reference;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.inventory.EntityEquipmentSlot;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class ItemSpear extends ItemBase {
+import javax.annotation.Nullable;
+
+public class ItemSpear extends Item {
 
   private final float attackDamage;
 
   public ItemSpear() {
     setRegistryName(Reference.MOD_ID, "spear");
-    setTranslationKey("spear");
+    setTranslationKey(Reference.MOD_ID + ".spear");
     this.maxStackSize = 1;
     this.setMaxDamage(150);
     // 5 hearts
@@ -43,5 +47,11 @@ public class ItemSpear extends ItemBase {
     }
 
     return multimap;
+  }
+
+  @Nullable
+  @Override
+  public CreativeTabs getCreativeTab() {
+    return Reference.HISTORY_CREATIVE_TAB;
   }
 }
