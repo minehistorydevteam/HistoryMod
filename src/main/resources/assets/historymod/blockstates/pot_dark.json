@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "normal": { "model": "historymod:pot_dark"},
+    "inventory": { "model": "historymod:pot_dark"}
+  }
+}

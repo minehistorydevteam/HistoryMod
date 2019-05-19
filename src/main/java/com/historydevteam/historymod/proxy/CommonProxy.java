@@ -1,5 +1,6 @@
 package com.historydevteam.historymod.proxy;
 
+import com.historydevteam.historymod.registry.Blocks;
 import com.historydevteam.historymod.registry.CommonRegistry;
 import com.historydevteam.historymod.registry.Items;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,6 +22,7 @@ public class CommonProxy {
 
   public void preInit(FMLPreInitializationEvent event) {
     Items.init();
+    Blocks.init();
     MinecraftForge.EVENT_BUS.register(registry);
   }
 
