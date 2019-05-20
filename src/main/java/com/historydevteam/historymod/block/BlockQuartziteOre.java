@@ -1,10 +1,10 @@
 package com.historydevteam.historymod.block;
 
+import com.historydevteam.historymod.registry.Items;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 import java.util.Random;
@@ -25,6 +25,6 @@ public class BlockQuartziteOre extends Block {
 
   @Override
   public Item getItemDropped(IBlockState state, Random rand, int fortune) {
-    return Items.FLINT;
+    return Items.QUARTZITE;
   }
 }
