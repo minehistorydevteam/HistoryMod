@@ -1,5 +1,6 @@
 package com.historydevteam.historymod.registry;
 
+import com.historydevteam.historymod.block.BlockFlintOre;
 import com.historydevteam.historymod.block.BlockPot;
 import com.historydevteam.historymod.block.ISpecialItemBlock;
 import com.historydevteam.historymod.util.Reference;
@@ -13,7 +14,7 @@ public class Blocks {
 
   public static final BlockPot POT_DARK = new BlockPot(BlockPot.Variant.DARK);
   public static final BlockPot POT_LIGHT = new BlockPot(BlockPot.Variant.LIGHT);
-  public static final Block FLINT_ORE = create(Material.ROCK, "flint_ore", Reference.HISTORY_CREATIVE_TAB);
+  public static final Block FLINT_ORE = new BlockFlintOre();
 
   static ItemBlock getItemBlock(Block block) {
     if(block instanceof ISpecialItemBlock) return ((ISpecialItemBlock)block).getItemBlock();

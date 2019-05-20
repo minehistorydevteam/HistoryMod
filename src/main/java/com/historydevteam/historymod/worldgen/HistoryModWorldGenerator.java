@@ -14,7 +14,7 @@ public enum HistoryModWorldGenerator implements IWorldGenerator {
   INSTANCE;
 
   // Ore config
-  private static final WorldGenConfig FLINT_ORE_CONFIG = new WorldGenConfig(20, 9, 0, 64);
+  private static final WorldGenConfig FLINT_ORE_CONFIG = new WorldGenConfig(2, 9, 48, 80);
 
   // Ore WorldGenerators
   private static final WorldGenMinable flint_ore = new WorldGenMinable(Blocks.FLINT_ORE.getDefaultState(), FLINT_ORE_CONFIG.blocksPerVein);
