@@ -1,0 +1,26 @@
+{ 
+    "type": "minecraft:crafting_shapeless",
+
+    "ingredients": 
+    [
+
+    {
+      "item": "minecraft:dirt"
+    },
+
+    {
+      "item": "minecraft:apple"
+    },
+    
+    {
+      "item": "minecraft:apple"
+    }
+    
+    ],
+
+    "result": 
+    {
+        "item": "minecraft:diamond_block",
+        "count": 1
+    }
+}
