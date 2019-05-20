@@ -1,23 +1,20 @@
-{  
-   "type":"minecraft:crafting_shaped",
-   "pattern":[  
-      " x ",
-      " y ",
-      " y "
-   ],
-   "key":{  
-      "x":{  
-         "item":"minecraft:fint"
-      },
-      "y":{  
-         "item":"minecraft:stick"
-      },
-      "z":{  
-         "item":"minecraft:diamond"
-      }
-   },
-   "result":{  
-      "item":"historymod:spear",
-      "count":2
-   }
+{
+    "type": "crafting_shaped",
+    "pattern": [
+        " x ",
+        " y ",
+        " y "
+    ],
+    "key": {
+        "x": {
+            "item": "minecraft:flint"
+        },
+        "y": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+    "item": "historymod:spear",
+        "count": 3
+    }
 }
