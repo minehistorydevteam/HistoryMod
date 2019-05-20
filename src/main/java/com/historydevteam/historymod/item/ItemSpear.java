@@ -33,7 +33,7 @@ public class ItemSpear extends Item {
     setRegistryName(Reference.MOD_ID, "spear");
     setTranslationKey(Reference.MOD_ID + ".spear");
     setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
-    this.maxStackSize = 1;
+    this.maxStackSize = 64;
     this.setMaxDamage(150);
     // 5 hearts
     this.attackDamage = 5.0F;
