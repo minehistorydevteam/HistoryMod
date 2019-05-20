@@ -18,7 +18,6 @@ public class RenderSpear extends Render<EntityThrownSpear> {
   }
 
   public void doRender(EntityThrownSpear entity, double x, double y, double z, float entityYaw, float partialTicks) {
-    System.out.println(true);
     GlStateManager.pushMatrix();
     GlStateManager.translate((float)x, (float)y, (float)z);
     GlStateManager.enableRescaleNormal();

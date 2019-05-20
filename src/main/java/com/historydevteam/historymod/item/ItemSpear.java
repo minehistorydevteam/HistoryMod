@@ -105,8 +105,6 @@ public class ItemSpear extends Item {
         if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0) {
           entity.setFire(100);
         }
-
-        stack.damageItem(1, entityplayer);
         worldIn.spawnEntity(entity);
       }
 
