@@ -45,7 +45,6 @@ public class BlockPot extends Block {
   public boolean isOpaqueCube(IBlockState state) {
     return false;
   }
-
   public BlockPot(Variant variant) {
     super(Material.ROCK);
     setTranslationKey(Reference.MOD_ID + "." + variant.getTranslationKey());

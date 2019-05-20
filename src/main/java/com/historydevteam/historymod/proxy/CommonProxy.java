@@ -2,6 +2,7 @@ package com.historydevteam.historymod.proxy;
 
 import com.historydevteam.historymod.registry.Blocks;
 import com.historydevteam.historymod.registry.CommonRegistry;
+import com.historydevteam.historymod.registry.Entities;
 import com.historydevteam.historymod.registry.Items;
 import com.historydevteam.historymod.worldgen.HistoryModWorldGenerator;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,6 +26,7 @@ public class CommonProxy {
   public void preInit(FMLPreInitializationEvent event) {
     Items.init();
     Blocks.init();
+    Entities.init();
     GameRegistry.registerWorldGenerator(HistoryModWorldGenerator.INSTANCE, 10);
     MinecraftForge.EVENT_BUS.register(registry);
   }

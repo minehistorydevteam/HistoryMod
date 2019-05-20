@@ -5,10 +5,12 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class ClientRegistry extends CommonRegistry {
 
   @Override
+  @SubscribeEvent
   public void addItems(RegistryEvent.Register<Item> itemRegisterEvent) {
     super.addItems(itemRegisterEvent);
     CommonRegistry.ITEMS_TO_REGISTER.forEach(item -> ModelLoader
