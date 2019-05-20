@@ -45,10 +45,12 @@ public class BlockPot extends Block {
   public boolean isOpaqueCube(IBlockState state) {
     return false;
   }
+
   public BlockPot(Variant variant) {
     super(Material.ROCK);
     setTranslationKey(Reference.MOD_ID + "." + variant.getTranslationKey());
     setRegistryName(Reference.MOD_ID, variant.getTranslationKey());
     setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
+    setLightLevel(variant == Variant.LIGHT ? 0.65f : 0f);
   }
 }
