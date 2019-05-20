@@ -21,6 +21,8 @@ public class Items {
       EntityEquipmentSlot.LEGS);
   public static final ItemTatteredClothArmor TATTERED_CLOTH_BOOTS = new ItemTatteredClothArmor(
       EntityEquipmentSlot.FEET);
+  public static final Item QUARTZITE = create("quartzite", Reference.HISTORY_CREATIVE_TAB);
+
 
   public static void init() {
     CommonRegistry.ITEMS_TO_REGISTER.add(STONE_WHEEL);
@@ -30,6 +32,7 @@ public class Items {
     CommonRegistry.ITEMS_TO_REGISTER.add(TATTERED_CLOTH_TUNIC);
     CommonRegistry.ITEMS_TO_REGISTER.add(TATTERED_CLOTH_PANTS);
     CommonRegistry.ITEMS_TO_REGISTER.add(TATTERED_CLOTH_BOOTS);
+    CommonRegistry.ITEMS_TO_REGISTER.add(QUARTZITE);
   }
 
   private static Item create(String name, CreativeTabs tabs) {

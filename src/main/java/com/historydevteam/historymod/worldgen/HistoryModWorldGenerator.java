@@ -15,13 +15,16 @@ public enum HistoryModWorldGenerator implements IWorldGenerator {
 
   // Ore config
   private static final WorldGenConfig FLINT_ORE_CONFIG = new WorldGenConfig(2, 9, 48, 80);
+  private static final WorldGenConfig QUARTZITE_ORE_CONFIG = new WorldGenConfig(2, 9, 48, 80);
 
   // Ore WorldGenerators
   private static final WorldGenMinable flint_ore = new WorldGenMinable(Blocks.FLINT_ORE.getDefaultState(), FLINT_ORE_CONFIG.blocksPerVein);
+  private static final WorldGenMinable quartzite_ore = new WorldGenMinable(Blocks.QUARTZITE_ORE.getDefaultState(), QUARTZITE_ORE_CONFIG.blocksPerVein);
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
     generateVeins(flint_ore, random, world, chunkX, chunkZ, FLINT_ORE_CONFIG);
+    generateVeins(quartzite_ore, random, world, chunkX, chunkZ, QUARTZITE_ORE_CONFIG);
   }
 
   private void generateVeins(WorldGenMinable generator, Random random, World world, int chunkX, int chunkZ, WorldGenConfig config) {
