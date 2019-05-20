@@ -19,11 +19,7 @@
         {
             "item": "minecraft:stick"
         },
-        
-        "z":
-        {
-            "item": "minecraft:diamond"
-        }
+      
     },
     
     "result":
@@ -31,4 +27,4 @@
         "item": "historymod:spear",
         "count": 2
     }
-}
+
