@@ -1,26 +1,34 @@
-{ 
-    "type": "minecraft:crafting_shapeless",
-
-    "ingredients": 
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
     [
-
-    {
-      "item": "minecraft:dirt"
-    },
-
-    {
-      "item": "minecraft:apple"
-    },
-    
-    {
-      "item": "minecraft:apple"
-    }
-    
+        " x ",
+        " y ",
+        " y "
     ],
-
-    "result": 
+    
+    "key":
     {
-        "item": "minecraft:diamond_block",
-        "count": 1
+        "x":
+        {
+            "item": "minecraft:fint"
+        },
+        
+        "y":
+        {
+            "item": "minecraft:stick"
+        },
+        
+        "z":
+        {
+            "item": "minecraft:diamond"
+        }
+    },
+    
+    "result":
+    {
+        "item": "historymod:spear",
+        "count": 2
     }
 }
