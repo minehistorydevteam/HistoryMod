@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "cube_all",
+    "transform": "forge:default-block",
+    "textures": {
+      "all": "historymod:blocks/flint_ore",
+      "particle": "historymod:blocks/flint_ore"
+    }
+  },
+  "variants": {
+    "normal": [{}],
+    "inventory": [{}]
+  }
+}

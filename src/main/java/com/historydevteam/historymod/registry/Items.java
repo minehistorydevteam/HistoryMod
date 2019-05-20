@@ -33,7 +33,9 @@ public class Items {
   }
 
   private static Item create(String name, CreativeTabs tabs) {
-    return new Item().setCreativeTab(tabs).setTranslationKey(Reference.MOD_ID + "." + name)
+    return new Item()
+        .setCreativeTab(tabs)
+        .setTranslationKey(Reference.MOD_ID + "." + name)
         .setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
   }
 }

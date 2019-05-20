@@ -11,8 +11,8 @@ import java.util.function.Function;
 
 public class CommonRegistry {
 
-  static final Set<Item> ITEMS_TO_REGISTER = new HashSet<>(1);
-  static final Set<Block> BLOCKS_TO_REGISTER = new HashSet<>(1);
+  static final Set<Item> ITEMS_TO_REGISTER = new HashSet<>();
+  static final Set<Block> BLOCKS_TO_REGISTER = new HashSet<>();
 
   @SubscribeEvent
   public void addItems(RegistryEvent.Register<Item> event) {
