@@ -2,6 +2,7 @@ package com.historydevteam.historymod.worldgen;
 
 import com.historydevteam.historymod.registry.Blocks;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
@@ -23,8 +24,10 @@ public enum HistoryModWorldGenerator implements IWorldGenerator {
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
-    generateVeins(flint_ore, random, world, chunkX, chunkZ, FLINT_ORE_CONFIG);
-    generateVeins(quartzite_ore, random, world, chunkX, chunkZ, QUARTZITE_ORE_CONFIG);
+    if (world.provider.getDimensionType() != DimensionType.NETHER && world.provider.getDimensionType() != DimensionType.THE_END) {
+      generateVeins(flint_ore, random, world, chunkX, chunkZ, FLINT_ORE_CONFIG);
+      generateVeins(quartzite_ore, random, world, chunkX, chunkZ, QUARTZITE_ORE_CONFIG);
+    }
   }
 
   private void generateVeins(WorldGenMinable generator, Random random, World world, int chunkX, int chunkZ, WorldGenConfig config) {
