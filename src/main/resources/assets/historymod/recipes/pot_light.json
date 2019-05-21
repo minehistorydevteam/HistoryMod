@@ -1,0 +1,18 @@
+{
+    "type": "minecraft:crafting_shapless",
+    
+        {
+            "item": "minecraft:pot_dark"
+        },
+        
+        {
+            "item": "minecraft:torch"
+        }
+    },
+    
+    "result":
+    {
+        "item": "pot_light",
+        "count": 1
+    }
+}
