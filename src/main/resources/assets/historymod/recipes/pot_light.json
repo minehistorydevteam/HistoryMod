@@ -1,18 +1,16 @@
 {
-    "type": "minecraft:crafting_shapless",
-    
-        {
-            "item": "minecraft:pot_dark"
-        },
-        
-        {
-            "item": "minecraft:torch"
-        }
-    },
-    
-    "result":
-    {
-        "item": "pot_light",
-        "count": 1
-    }
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+		{
+			"item": "historymod:pot_dark",
+			"data": 0
+		},
+		{
+			"item": "minecraft:torch",
+			"data": 0
+		}
+	],
+	"result": {
+		"item": "historymod:pot_light"
+	}
 }
