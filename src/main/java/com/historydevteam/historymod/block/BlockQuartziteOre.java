@@ -16,6 +16,7 @@ public class BlockQuartziteOre extends Block {
     setTranslationKey(Reference.MOD_ID + ".quartzite_ore");
     setRegistryName(Reference.MOD_ID, "quartzite_ore");
     setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
+    setHarvestLevel("pickaxe",2 /*0 is wood/gold, 1 is stone, 2 is iron, 3 is diamond*/);
   }
 
   @Override
