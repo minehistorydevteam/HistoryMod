@@ -1,0 +1,24 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "XXX",
+        "X X",
+        "   "
+    ],
+    
+    "key":
+    {
+        "X":
+        {
+            "item": "historymod:quartzite"
+        }
+    },
+    
+    "result":
+    {
+        "item": "historymod:pot_dark",
+        "count": 4
+    }
+}
