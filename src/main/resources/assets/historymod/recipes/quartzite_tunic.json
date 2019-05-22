@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "x x",
+        "xxx",
+        "xxx"
+    ],
+    
+    "key":
+    {
+        "X":
+        {
+            "item": "historymod:quartzite"
+        }
+    },
+    
+    "result":
+    {
+        "item": "historymod:quartzite_tunic"
+    }
+}
