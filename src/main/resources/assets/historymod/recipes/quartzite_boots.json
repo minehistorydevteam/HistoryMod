@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    
+    "pattern":
+    [
+        "   ",
+        "x x",
+        "x x"
+    ],
+    
+    "key":
+    {
+        "X":
+        {
+            "item": "historymod:quartzite"
+        }
+    },
+    
+    "result":
+    {
+        "item": "historymod:quartzite_boots"
+    }
+}
