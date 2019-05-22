@@ -9,7 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.event.ModelBakeEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
@@ -37,11 +36,6 @@ public enum LoreHelper {
 
     nbt.setTag("Lore", list);
     stack.setTagInfo("display", nbt);
-  }
-
-  @SubscribeEvent
-  public void onResourceManagerReloads(ModelBakeEvent e) {
-    loadLoreFile();
   }
 
   public void loadLoreFile() {
