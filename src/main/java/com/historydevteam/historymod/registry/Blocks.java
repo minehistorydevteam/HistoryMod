@@ -27,6 +27,11 @@ public class Blocks {
   public static final Block STICKS = new BlockModel(Material.WOOD, "sticks")
       .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
 
+  public static final Block FIREPIT = new BlockRotableModel(Material.WOOD, "firepit");
+  public static final Block UNFIRED_CLAY_KILN = new BlockRotableModel(Material.CLAY, "unfired_clay_kiln");
+  public static final Block FIRED_CLAY_KILN = new BlockRotableModel(Material.ROCK, "fired_clay_kiln");
+  public static final Block PRIMITIVE_WORKBENCH = new BlockModel(Material.WOOD, "primitive_workbench");
+
   static ItemBlock getItemBlock(Block block) {
     if (block instanceof ISpecialItemBlock) {
       return ((ISpecialItemBlock) block).getItemBlock();
@@ -44,6 +49,10 @@ public class Blocks {
     CommonRegistry.BLOCKS_TO_REGISTER.add(WAX_CANDLE);
     CommonRegistry.BLOCKS_TO_REGISTER.add(PEBBLES);
     CommonRegistry.BLOCKS_TO_REGISTER.add(STICKS);
+    CommonRegistry.BLOCKS_TO_REGISTER.add(FIREPIT);
+    CommonRegistry.BLOCKS_TO_REGISTER.add(UNFIRED_CLAY_KILN);
+    CommonRegistry.BLOCKS_TO_REGISTER.add(FIRED_CLAY_KILN);
+    CommonRegistry.BLOCKS_TO_REGISTER.add(PRIMITIVE_WORKBENCH);
   }
 
   private static Block create(Material material, String name, CreativeTabs tabs) {

@@ -11,6 +11,10 @@ tile.historymod.rack.name=Drying rack
 tile.historymod.wax_candle.name=Wax Candle
 tile.historymod.pebbles.name=Pebbles
 tile.historymod.sticks.name=Sticks
+tile.historymod.firepit.name=Firepit
+tile.historymod.unfired_clay_kiln.name=Unfired Clay Kiln
+tile.historymod.fired_clay_kiln.name=Fired Clay Kiln
+tile.historymod.primitive_workbench.name=Primitive Workbench
 # Items
 item.historymod.quartzite.name=Quartzite
 item.historymod.tattered_cloth.name=Tattered Cloth
