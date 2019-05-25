@@ -1,7 +1,5 @@
 package com.historydevteam.historymod.block;
 
-import com.historydevteam.historymod.util.Reference;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
@@ -11,13 +9,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockRack extends Block {
+public class BlockRack extends BlockModel {
 
   public BlockRack() {
-    super(Material.ROCK);
-    setTranslationKey(Reference.MOD_ID + ".rack");
-    setRegistryName(Reference.MOD_ID, "rack");
-    setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
+    super(Material.ROCK, "rack");
   }
 
   @Override
@@ -41,20 +36,5 @@ public class BlockRack extends Block {
                               ItemStack stack) {
     IBlockState facingState = state.withProperty(BlockProperties.ORIENTATION, placer.getHorizontalFacing());
     worldIn.setBlockState(pos, facingState);
-  }
-
-  @Override
-  public boolean isFullBlock(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public boolean isOpaqueCube(IBlockState state) {
-    return false;
-  }
-
-  @Override
-  public boolean isFullCube(IBlockState state) {
-    return false;
   }
 }

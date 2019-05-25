@@ -1,0 +1,33 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "historymod:blocks/wax_candle",
+		"particle": "historymod:blocks/wax_candle"
+	},
+	"elements": [
+		{
+			"from": [7.5, 13, 7.5],
+			"to": [8.5, 16, 8.5],
+			"faces": {
+				"north": {"uv": [0.25, 5.75, 0.5, 6.5], "texture": "#1"},
+				"east": {"uv": [0, 5.75, 0.25, 6.5], "texture": "#1"},
+				"south": {"uv": [0.75, 5.75, 1, 6.5], "texture": "#1"},
+				"west": {"uv": [0.5, 5.75, 0.75, 6.5], "texture": "#1"},
+				"up": {"uv": [0.5, 5.75, 0.25, 5.5], "texture": "#1"},
+				"down": {"uv": [0.75, 5.5, 0.5, 5.75], "texture": "#1"}
+			}
+		},
+		{
+			"from": [3.5, 0, 3.5],
+			"to": [12.5, 13, 12.5],
+			"faces": {
+				"north": {"uv": [2.25, 2.25, 4.5, 5.5], "texture": "#1"},
+				"east": {"uv": [0, 2.25, 2.25, 5.5], "texture": "#1"},
+				"south": {"uv": [6.75, 2.25, 9, 5.5], "texture": "#1"},
+				"west": {"uv": [4.5, 2.25, 6.75, 5.5], "texture": "#1"},
+				"up": {"uv": [4.5, 2.25, 2.25, 0], "texture": "#1"},
+				"down": {"uv": [6.75, 0, 4.5, 2.25], "texture": "#1"}
+			}
+		}
+	]
+}

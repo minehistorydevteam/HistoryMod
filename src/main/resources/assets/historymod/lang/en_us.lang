@@ -8,6 +8,9 @@ tile.historymod.pot_light.name=Light Pot
 tile.historymod.flint_ore.name=Flint Ore
 tile.historymod.quartzite_ore.name=Quartzite Ore
 tile.historymod.rack.name=Drying rack
+tile.historymod.wax_candle.name=Wax Candle
+tile.historymod.pebbles.name=Pebbles
+tile.historymod.sticks.name=Sticks
 # Items
 item.historymod.quartzite.name=Quartzite
 item.historymod.tattered_cloth.name=Tattered Cloth
