@@ -33,26 +33,9 @@ public class Blocks {
   public static final Block PRIMITIVE_WORKBENCH = new BlockModel(Material.WOOD, "primitive_workbench");
 
   static ItemBlock getItemBlock(Block block) {
-    if (block instanceof ISpecialItemBlock) {
-      return ((ISpecialItemBlock) block).getItemBlock();
-    } else {
-      return (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
-    }
-  }
-
-  public static void init() {
-    CommonRegistry.BLOCKS_TO_REGISTER.add(POT_DARK);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(POT_LIGHT);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(FLINT_ORE);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(QUARTZITE_ORE);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(RACK);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(WAX_CANDLE);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(PEBBLES);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(STICKS);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(FIREPIT);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(UNFIRED_CLAY_KILN);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(FIRED_CLAY_KILN);
-    CommonRegistry.BLOCKS_TO_REGISTER.add(PRIMITIVE_WORKBENCH);
+    return (block instanceof ISpecialItemBlock)
+        ? ((ISpecialItemBlock) block).getItemBlock()
+        : (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
   }
 
   private static Block create(Material material, String name, CreativeTabs tabs) {
