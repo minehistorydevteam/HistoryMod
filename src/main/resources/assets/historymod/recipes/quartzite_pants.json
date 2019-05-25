@@ -10,7 +10,7 @@
     
     "key":
     {
-        "X":
+        "x":
         {
             "item": "historymod:quartzite"
         }
@@ -18,6 +18,6 @@
     
     "result":
     {
-        "item": "historymod:quartzite_pants"
+        "item": "historymod:quartzite_leggings"
     }
 }

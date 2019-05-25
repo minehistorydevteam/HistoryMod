@@ -10,13 +10,9 @@
     
     "key":
     {
-        "X":
+        "x":
         {
             "item": "minecraft:clay"
-        },
-         "Y":
-        {
-            "item": "minecraft:stick"
         }
     },
     

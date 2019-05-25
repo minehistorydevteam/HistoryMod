@@ -4,7 +4,6 @@ import com.google.common.collect.Multimap;
 import com.historydevteam.historymod.entity.EntityThrownSpear;
 import com.historydevteam.historymod.registry.Items;
 import com.historydevteam.historymod.util.Reference;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -22,8 +21,6 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class ItemSpear extends Item {
 
@@ -66,21 +63,21 @@ public class ItemSpear extends Item {
 
   public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft) {
     if (entityLiving instanceof EntityPlayer) {
-      EntityPlayer entityplayer = (EntityPlayer)entityLiving;
+      EntityPlayer entityplayer = (EntityPlayer) entityLiving;
       ItemStack itemstack = entityLiving.getActiveItemStack();
 
       int i = this.getMaxItemUseDuration(stack) - timeLeft;
       if (i < 0) return;
 
       if (entityplayer.capabilities.isCreativeMode) {
-        if(itemstack.isEmpty()) {
+        if (itemstack.isEmpty()) {
           itemstack = new ItemStack(Items.SPEAR);
         }
       }
 
       double f = getArrowVelocity(i);
 
-      if(f < 0.1D) return;
+      if (f < 0.1D) return;
 
       if (!worldIn.isRemote) {
         EntityThrownSpear entity = createThrownSpear(worldIn, itemstack, entityplayer);
@@ -121,9 +118,11 @@ public class ItemSpear extends Item {
 
   private static EntityThrownSpear createThrownSpear(World worldIn, ItemStack itemstack, EntityPlayer entityplayer) {
     EntityThrownSpear spear = new EntityThrownSpear(worldIn, entityplayer);
-    if(!entityplayer.capabilities.isCreativeMode) itemstack.damageItem(1, entityplayer);
-    if(itemstack.getItemDamage() == itemstack.getMaxDamage())
-    spear.setSpearItem(itemstack);
+    if (!entityplayer.capabilities.isCreativeMode) itemstack.damageItem(1, entityplayer);
+
+    ItemStack itemToPickup = itemstack.copy();
+    itemToPickup.setCount(1);
+    spear.setSpearItem(itemToPickup);
     return spear;
   }
 
@@ -149,9 +148,9 @@ public class ItemSpear extends Item {
 
   @Override
   public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn,
-      EnumHand handIn) {
+                                                  EnumHand handIn) {
     playerIn.setActiveHand(handIn);
-    return  new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
+    return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
   }
 
   @Override

@@ -24,6 +24,7 @@ public class RenderSpear extends Render<EntityThrownSpear> implements IModelRelo
     GlStateManager.translate((float) x, (float) y, (float) z);
     GlStateManager.enableRescaleNormal();
 
+    // Renders a cube at the model rotation pivot
 //    ModelUtilities.renderDebugBox(new AxisAlignedBB(0d, 0d, 0d, 0.1d, 0.1d, 0.1d), null);
 
     GlStateManager.rotate(entity.prevRotationYaw + (entity.rotationYaw - entity.prevRotationYaw) * partialTicks - 90.0F, 0.0F, 1.0F, 0.0F);
