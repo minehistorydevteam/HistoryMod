@@ -18,11 +18,11 @@ public class Blocks {
   public static final BlockRack RACK = new BlockRack();
 
   public static final BlockModel WAX_CANDLE = new BlockModel(Material.WOOD, "wax_candle")
-      .setAABB(new AxisAlignedBB(3f / 16f, 0, 3f / 16f, 13f / 16f, 13f / 16f, 13f / 16f));
+      .setAABB(new AxisAlignedBB(3f / 16f, 0, 3f / 16f, 13f / 16f, 13f / 16f, 13f / 16f))
+      .setLightEmission(10);
 
   public static final BlockModel PEBBLES = new BlockModel(Material.ROCK, "pebbles")
-      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 14f / 16f, 0))
-      .setLightEmission(10);
+      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 14f / 16f, 0));
 
   public static final Block STICKS = new BlockModel(Material.WOOD, "sticks")
       .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));

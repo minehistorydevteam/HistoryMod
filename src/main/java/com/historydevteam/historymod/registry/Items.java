@@ -40,6 +40,13 @@ public class Items {
   public static final ItemQuartziteArmor QUARTZITE_BOOTS =
       new ItemQuartziteArmor(EntityEquipmentSlot.FEET);
 
+  public static final Item BEADS = create("beads", Reference.HISTORY_CREATIVE_TAB);
+  public static final Item PRIMITIVE_AXE = create("primitive_axe", Reference.HISTORY_CREATIVE_TAB);
+  public static final Item PRIMITIVE_HAMMER = create("primitive_hammer", Reference.HISTORY_CREATIVE_TAB);
+  public static final Item STONE_DAGGER = create("stone_dagger", Reference.HISTORY_CREATIVE_TAB);
+  public static final Item ATL_ATL = create("atl_atl", Reference.HISTORY_CREATIVE_TAB);
+
+
   public static void init() {
     CommonRegistry.ITEMS_TO_REGISTER.add(STONE_WHEEL);
     CommonRegistry.ITEMS_TO_REGISTER.add(SPEAR);
@@ -53,6 +60,11 @@ public class Items {
     CommonRegistry.ITEMS_TO_REGISTER.add(QUARTZITE_TUNIC);
     CommonRegistry.ITEMS_TO_REGISTER.add(QUARTZITE_PANTS);
     CommonRegistry.ITEMS_TO_REGISTER.add(QUARTZITE_BOOTS);
+    CommonRegistry.ITEMS_TO_REGISTER.add(BEADS);
+    CommonRegistry.ITEMS_TO_REGISTER.add(PRIMITIVE_AXE);
+    CommonRegistry.ITEMS_TO_REGISTER.add(PRIMITIVE_HAMMER);
+    CommonRegistry.ITEMS_TO_REGISTER.add(STONE_DAGGER);
+    CommonRegistry.ITEMS_TO_REGISTER.add(ATL_ATL);
   }
 
   private static Item create(String name, CreativeTabs tabs) {
