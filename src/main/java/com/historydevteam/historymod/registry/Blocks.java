@@ -1,9 +1,6 @@
 package com.historydevteam.historymod.registry;
 
-import com.historydevteam.historymod.block.BlockFlintOre;
-import com.historydevteam.historymod.block.BlockPot;
-import com.historydevteam.historymod.block.BlockQuartziteOre;
-import com.historydevteam.historymod.block.ISpecialItemBlock;
+import com.historydevteam.historymod.block.*;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,6 +14,7 @@ public class Blocks {
   public static final BlockPot POT_LIGHT = new BlockPot(BlockPot.Variant.LIGHT);
   public static final BlockFlintOre FLINT_ORE = new BlockFlintOre();
   public static final BlockQuartziteOre QUARTZITE_ORE = new BlockQuartziteOre();
+  public static final BlockRack RACK = new BlockRack();
 
   static ItemBlock getItemBlock(Block block) {
     if(block instanceof ISpecialItemBlock) return ((ISpecialItemBlock)block).getItemBlock();
@@ -28,6 +26,7 @@ public class Blocks {
     CommonRegistry.BLOCKS_TO_REGISTER.add(POT_LIGHT);
     CommonRegistry.BLOCKS_TO_REGISTER.add(FLINT_ORE);
     CommonRegistry.BLOCKS_TO_REGISTER.add(QUARTZITE_ORE);
+    CommonRegistry.BLOCKS_TO_REGISTER.add(RACK);
   }
 
   private static Block create(Material material, String name, CreativeTabs tabs) {
