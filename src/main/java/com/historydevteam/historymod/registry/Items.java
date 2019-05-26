@@ -9,15 +9,6 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
- public pebble() {
-    setRegistryName(Reference.MOD_ID, "pebble");
-    setTranslationKey(Reference.MOD_ID + ".pebble");
-    setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
-    this.maxStackSize = 16;
-    this.setMaxDamage(100);
-    // 3 hearts
-    this.attackDamage = 3.0F;
-
 public class Items {
 
   public static final Item STONE_WHEEL = create("stone_wheel", Reference.HISTORY_CREATIVE_TAB);
@@ -53,7 +44,6 @@ public class Items {
   public static final Item PRIMITIVE_AXE = create("primitive_axe", Reference.HISTORY_CREATIVE_TAB);
   public static final Item PRIMITIVE_HAMMER = create("primitive_hammer", Reference.HISTORY_CREATIVE_TAB);
   public static final Item STONE_DAGGER = create("stone_dagger", Reference.HISTORY_CREATIVE_TAB);
-  public static final Item Pebble = create ("pebble", Reference.HISTORY_CREATIVE_TAB);
   public static final Item ATL_ATL = create("atl_atl", Reference.HISTORY_CREATIVE_TAB);
 
 
@@ -75,7 +65,6 @@ public class Items {
     CommonRegistry.ITEMS_TO_REGISTER.add(PRIMITIVE_HAMMER);
     CommonRegistry.ITEMS_TO_REGISTER.add(STONE_DAGGER);
     CommonRegistry.ITEMS_TO_REGISTER.add(ATL_ATL);
-    CommonRegistry.ITEMS_TO_REGISTER.add(pebble);
   }
 
   private static Item create(String name, CreativeTabs tabs) {
