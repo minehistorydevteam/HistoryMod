@@ -21,7 +21,7 @@ public class CommonProxy {
   }
 
   public void preInit(FMLPreInitializationEvent event) {
-    GameRegistry.registerWorldGenerator(HistoryModWorldGenerator.INSTANCE, 10);
+    GameRegistry.registerWorldGenerator(new HistoryModWorldGenerator(), 3);
     MinecraftForge.EVENT_BUS.register(registry);
   }
 

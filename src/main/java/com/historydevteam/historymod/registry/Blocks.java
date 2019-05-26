@@ -3,11 +3,24 @@ package com.historydevteam.historymod.registry;
 import com.historydevteam.historymod.block.*;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class Blocks {
 
@@ -21,10 +34,29 @@ public class Blocks {
       .setAABB(new AxisAlignedBB(3f / 16f, 0, 3f / 16f, 13f / 16f, 13f / 16f, 13f / 16f))
       .setLightEmission(10);
 
-  public static final BlockModel PEBBLES = new BlockModel(Material.ROCK, "pebbles")
+  public static final BlockModel PEBBLES = new BlockModel(new Material(MapColor.STONE), "pebbles") {
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+      worldIn.destroyBlock(pos, true);
+      return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+  }
       .setAABB(Block.FULL_BLOCK_AABB.contract(0, 14f / 16f, 0));
 
-  public static final Block STICKS = new BlockModel(Material.WOOD, "sticks")
+  public static final Block STICKS = new BlockModel(Material.WOOD, "sticks"){
+    @Override
+    public Item getItemDropped(IBlockState state, Random rand, int fortune) {
+      return Items.STICK;
+    }
+
+    @Override
+    public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+      worldIn.destroyBlock(pos, true);
+      return super.onBlockActivated(worldIn, pos, state, playerIn, hand, facing, hitX, hitY, hitZ);
+    }
+
+
+  }
       .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
 
   public static final Block FIREPIT = new BlockRotableModel(Material.WOOD, "firepit");
