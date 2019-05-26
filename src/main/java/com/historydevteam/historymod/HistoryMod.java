@@ -1,6 +1,7 @@
 package com.historydevteam.historymod;
 
 import com.historydevteam.historymod.proxy.CommonProxy;
+import com.historydevteam.historymod.registry.Blocks;
 import com.historydevteam.historymod.util.Debug;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
@@ -20,6 +21,9 @@ public class HistoryMod {
   public static HashSet<Block> blacklist = new HashSet<>();
 
   static {
+    blacklist.add(Blocks.PEBBLES);
+    blacklist.add(Blocks.STICKS);
+    blacklist.add(net.minecraft.init.Blocks.AIR);
     blacklist.add(net.minecraft.init.Blocks.LEAVES);
     blacklist.add(net.minecraft.init.Blocks.LEAVES2);
     blacklist.add(net.minecraft.init.Blocks.LAVA);

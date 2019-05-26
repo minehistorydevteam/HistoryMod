@@ -26,6 +26,7 @@ public class HistoryModWorldGenerator implements IWorldGenerator {
 
   // Decoration WorldGenerators
   private static final WorldGenDecorations DECORATION_PEBBLES = new WorldGenDecorations(Blocks.PEBBLES);
+  private static final WorldGenDecorations DECORATION_STICKS = new WorldGenDecorations(Blocks.STICKS);
 
   @Override
   public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider) {
@@ -33,6 +34,7 @@ public class HistoryModWorldGenerator implements IWorldGenerator {
       generateVeins(flint_ore, random, world, chunkX, chunkZ, FLINT_ORE_CONFIG);
       generateVeins(quartzite_ore, random, world, chunkX, chunkZ, QUARTZITE_ORE_CONFIG);
       generateDecorations(DECORATION_PEBBLES, random, world, chunkX, chunkZ);
+      generateDecorations(DECORATION_STICKS, random, world, chunkX, chunkZ);
     }
   }
 
