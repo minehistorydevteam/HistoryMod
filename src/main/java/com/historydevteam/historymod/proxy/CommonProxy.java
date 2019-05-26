@@ -27,7 +27,7 @@ public class CommonProxy {
     Items.init();
     Blocks.init();
     Entities.init();
-    GameRegistry.registerWorldGenerator(HistoryModWorldGenerator.INSTANCE, 10);
+    GameRegistry.registerWorldGenerator(HistoryModWorldGenerator.INSTANCE, 3);
     MinecraftForge.EVENT_BUS.register(registry);
   }
 

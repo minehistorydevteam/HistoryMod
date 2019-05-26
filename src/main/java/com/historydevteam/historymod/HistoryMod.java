@@ -19,7 +19,7 @@ import java.util.HashSet;
 public class HistoryMod {
   public static HashSet<Block> blacklist = new HashSet<>();
 
-  {
+  static {
     blacklist.add(net.minecraft.init.Blocks.LEAVES);
     blacklist.add(net.minecraft.init.Blocks.LEAVES2);
     blacklist.add(net.minecraft.init.Blocks.LAVA);
