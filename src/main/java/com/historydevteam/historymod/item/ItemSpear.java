@@ -81,7 +81,7 @@ public class ItemSpear extends Item {
 
       if (!worldIn.isRemote) {
         EntityThrownSpear entity = createThrownSpear(worldIn, itemstack, entityplayer);
-        entity.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, (float) f * 3.0F, 1.0F);
+        entity.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0, (float) f * 3.0F, 1.0F);
 
         if (f == 1) {
           entity.setIsCritical(true);

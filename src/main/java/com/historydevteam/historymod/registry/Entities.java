@@ -8,7 +8,7 @@ public class Entities {
 
   public static final EntityEntry THROWN_SPEAR = EntityEntryBuilder.create()
       .entity(EntityThrownSpear.class)
-      .tracker(64, 1, true)
+      .tracker(64, 10, true)
       .name("thrown_spear")
       .id("thrown_spear", 0)
       .build();
