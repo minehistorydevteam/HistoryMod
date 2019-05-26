@@ -14,8 +14,7 @@ import net.minecraftforge.fml.common.IWorldGenerator;
 import java.util.HashSet;
 import java.util.Random;
 
-public enum HistoryModWorldGenerator implements IWorldGenerator {
-  INSTANCE;
+public class HistoryModWorldGenerator implements IWorldGenerator {
 
   // Ore config
   private static final WorldGenConfig FLINT_ORE_CONFIG = new WorldGenConfig(2, 9, 48, 80);
@@ -51,7 +50,7 @@ public enum HistoryModWorldGenerator implements IWorldGenerator {
       int x = chunkX * 16 + 8 + random.nextInt(16);
       int z = chunkZ * 16 + 8 + random.nextInt(16);
       BlockPos pos = new BlockPos(x, 0, z);
-      pos.up(world.getTopSolidOrLiquidBlock( pos ).getY()+1);
+      pos = pos.add(0, world.getTopSolidOrLiquidBlock( pos ).getY()+1,0);
       generator.generate(world, random, pos);
 
   }

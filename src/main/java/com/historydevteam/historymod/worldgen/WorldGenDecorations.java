@@ -22,6 +22,7 @@ public class WorldGenDecorations  extends WorldGenerator {
             if (worldIn.isAirBlock(blockpos) && !(HistoryMod.blacklist.contains(worldIn.getBlockState(blockpos).getBlock())))
             {
                 worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
+                System.out.println("placed x"+blockpos.getX()+", y"+blockpos.getY()+", z"+blockpos.getZ());
             }
         }
 
