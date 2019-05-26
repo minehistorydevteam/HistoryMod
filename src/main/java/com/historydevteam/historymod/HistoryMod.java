@@ -18,20 +18,6 @@ import java.util.HashSet;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.NAME, version = Reference.VERSION)
 public class HistoryMod {
-  public static HashSet<Block> blacklist = new HashSet<>();
-
-  static {
-    blacklist.add(Blocks.PEBBLES);
-    blacklist.add(Blocks.STICKS);
-    blacklist.add(net.minecraft.init.Blocks.AIR);
-    blacklist.add(net.minecraft.init.Blocks.LEAVES);
-    blacklist.add(net.minecraft.init.Blocks.LEAVES2);
-    blacklist.add(net.minecraft.init.Blocks.LAVA);
-    blacklist.add(net.minecraft.init.Blocks.WATER);
-    blacklist.add(net.minecraft.init.Blocks.WATERLILY);
-    blacklist.add(net.minecraft.init.Blocks.PLANKS);
-    blacklist.add(net.minecraft.init.Blocks.DEADBUSH);
-  }
 
   @Instance
   public static HistoryMod instance;

@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.worldgen;
 
 import com.historydevteam.historymod.registry.Blocks;
+import net.minecraft.block.Block;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
@@ -9,9 +10,26 @@ import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.fml.common.IWorldGenerator;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 public class HistoryModWorldGenerator implements IWorldGenerator {
+
+  public static Set<Block> blacklist = new HashSet<>();
+
+  static {
+    blacklist.add(Blocks.PEBBLES);
+    blacklist.add(Blocks.STICKS);
+    blacklist.add(net.minecraft.init.Blocks.AIR);
+    blacklist.add(net.minecraft.init.Blocks.LEAVES);
+    blacklist.add(net.minecraft.init.Blocks.LEAVES2);
+    blacklist.add(net.minecraft.init.Blocks.LAVA);
+    blacklist.add(net.minecraft.init.Blocks.WATER);
+    blacklist.add(net.minecraft.init.Blocks.WATERLILY);
+    blacklist.add(net.minecraft.init.Blocks.PLANKS);
+    blacklist.add(net.minecraft.init.Blocks.DEADBUSH);
+  }
 
   // Ore config
   private static final WorldGenConfig FLINT_ORE_CONFIG = new WorldGenConfig(2, 9, 48, 80);
