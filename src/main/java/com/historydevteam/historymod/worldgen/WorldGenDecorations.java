@@ -19,7 +19,7 @@ public class WorldGenDecorations  extends WorldGenerator {
         for (int i = 0; i < 64; ++i) {
             BlockPos blockpos = position.add(rand.nextInt(8) - rand.nextInt(8), rand.nextInt(4) - rand.nextInt(4), rand.nextInt(8) - rand.nextInt(8));
 
-            if (worldIn.isAirBlock(blockpos) && !(HistoryMod.blacklist.contains(worldIn.getBlockState(blockpos.down(1)).getBlock())) && worldIn.isBlockFullCube(blockpos.down(1)))
+            if (worldIn.isAirBlock(blockpos) && !(HistoryModWorldGenerator.blacklist.contains(worldIn.getBlockState(blockpos.down(1)).getBlock())) && worldIn.isBlockFullCube(blockpos.down(1)))
             {
                 worldIn.setBlockState(blockpos, this.block.getDefaultState(), 2);
                 System.out.println("placed x"+blockpos.getX()+", y"+blockpos.getY()+", z"+blockpos.getZ());
