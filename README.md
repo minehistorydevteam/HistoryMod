@@ -1,4 +1,4 @@
-#History Mod
+# History Mod
 This mod was created to take snapshots of history and bring them into the immersive world of minecraft. Within this mod we will be taking a look at a couple major moments of history.
 - Stone Age
 - Ancient Egypt
@@ -7,24 +7,26 @@ This mod was created to take snapshots of history and bring them into the immers
 - The Renaissance
 - The Englightment
 - The Industrial Revolution
-If enjoy modding, history or minecraft I reccomend you give this mod a try. If you have any feedback please do not hesitate to give feedback.
-Discord:https://discord.gg/kPsuDU7
-CurseForge:
 
+If enjoy modding, history or minecraft I reccomend you give this mod a try. If you have any feedback please do not
+hesitate to give feedback.
+Discord : https://discord.gg/kPsuDU7
+CurseForge :
 
-
-Setup
+## Setup
 - If you are interested in taking a look at the mod and do not have an understanding on how to set it up heres how.
 
+### Eclipse
+- Clone this repository.
+- Open up cmd in your root project directory.
+- Run `gradlew setupDecompWorkspace` to decompile and build Minecraft and Forge.
+- Run `gradlew eclipse` to download some more artifacts for building eclipse project.
+- Import project folder as an eclipse project and you are done.
 
-Eclipse
-- type into cmd cd (wherever the folder is located)
-- Next type gradlew setupDecompWorkspace
-- Then type gradlew eclipse.
-- Your done now open it with eclipse.
-
-Idea
-- type into cmd cd (wherever the folder is located)
-- Next type graldew setupDecompWorkspace
-- Type gradlew idea
-- Your done now open it with idea.
+### Intellij IDEA
+- Clone this repository.
+- Open up cmd in your root project directory.
+- Run `gradlew setupDecompWorkspace` to decompile and build Minecraft and Forge.
+- Run `gradlew idea`
+- Run `gradlew genIntellijRuns` to generate idea run configs.
+- Import the `build.gradle` file and you are done.
