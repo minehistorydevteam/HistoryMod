@@ -1,26 +1,32 @@
 package com.historydevteam.historymod.registry;
 
-import com.historydevteam.historymod.block.*;
+import java.util.Random;
+
+import com.historydevteam.historymod.block.BlockFlintOre;
+import com.historydevteam.historymod.block.BlockModel;
+import com.historydevteam.historymod.block.BlockPot;
+import com.historydevteam.historymod.block.BlockQuartziteOre;
+import com.historydevteam.historymod.block.BlockRack;
+import com.historydevteam.historymod.block.BlockRotableModel;
+import com.historydevteam.historymod.block.ISpecialItemBlock;
+import com.historydevteam.historymod.block.machines.kiln.BlockKiln;
 import com.historydevteam.historymod.util.Reference;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-
-import java.util.Random;
 
 public class Blocks {
 
@@ -60,8 +66,7 @@ public class Blocks {
       .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
 
   public static final Block FIREPIT = new BlockRotableModel(Material.WOOD, "firepit");
-  public static final Block UNFIRED_CLAY_KILN = new BlockRotableModel(Material.CLAY, "unfired_clay_kiln");
-  public static final Block FIRED_CLAY_KILN = new BlockRotableModel(Material.ROCK, "fired_clay_kiln");
+  public static final Block CLAY_KILN = new BlockKiln("clay_kiln");
   public static final Block PRIMITIVE_WORKBENCH = new BlockModel(Material.WOOD, "primitive_workbench");
 
   static ItemBlock getItemBlock(Block block) {
