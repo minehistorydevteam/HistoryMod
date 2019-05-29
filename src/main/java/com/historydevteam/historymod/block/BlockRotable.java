@@ -9,10 +9,10 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockRotableModel extends BlockModel {
+public class BlockRotable extends HMBlock {
 
-  public BlockRotableModel(Material materialIn, String name) {
-    super(materialIn, name);
+  public BlockRotable(Material materialIn) {
+    super(materialIn);
   }
 
   @Override
