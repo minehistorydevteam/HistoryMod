@@ -1,0 +1,13 @@
+{
+    "parent": "block/orientable",
+    "textures":
+    {
+        "particle": "historymod:blocks/clay_kiln_front_off",
+        "up": "historymod:blocks/clay_kiln_side1",
+        "down": "historymod:blocks/clay_kiln_side1",
+        "north": "historymod:blocks/clay_kiln_front_on",
+        "east": "historymod:blocks/clay_kiln_side1",
+        "south": "historymod:blocks/clay_kiln_side3",
+        "west": "historymod:blocks/clay_kiln_side2"
+    }
+}
