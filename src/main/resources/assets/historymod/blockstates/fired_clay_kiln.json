@@ -9,10 +9,14 @@
     }
   },
   "variants": {
-    "orientation=north": [{ "y": 180 }],
-    "orientation=south": [{ "y": 0 }],
-    "orientation=east": [{ "y": 270 }],
-    "orientation=west": [{ "y": 90 }],
+    "burning=true,orientation=north": [{ "y": 180 }],
+    "burning=true,orientation=south": [{ "y": 0 }],
+    "burning=true,orientation=east": [{ "y": 270 }],
+    "burning=true,orientation=west": [{ "y": 90 }],
+    "burning=false,orientation=north": [{ "y": 180 }],
+    "burning=false,orientation=south": [{ "y": 0 }],
+    "burning=false,orientation=east": [{ "y": 270 }],
+    "burning=false,orientation=west": [{ "y": 90 }],
     "normal": [{}]
   }
 }

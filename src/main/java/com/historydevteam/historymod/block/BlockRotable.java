@@ -6,6 +6,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -29,6 +31,16 @@ public class BlockRotable extends HMBlock {
   public IBlockState getStateFromMeta(int meta) {
     return getDefaultState()
         .withProperty(BlockProperties.ORIENTATION, EnumFacing.byHorizontalIndex(meta));
+  }
+
+  @Override
+  public IBlockState withRotation(IBlockState state, Rotation rot) {
+    return state.withProperty(BlockProperties.ORIENTATION, rot.rotate(state.getValue(BlockProperties.ORIENTATION)));
+  }
+
+  @Override
+  public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+    return state.withRotation(mirrorIn.toRotation(state.getValue(BlockProperties.ORIENTATION)));
   }
 
   @Override

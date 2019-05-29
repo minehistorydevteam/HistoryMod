@@ -1,7 +1,6 @@
 package com.historydevteam.historymod.registry;
 
 import com.historydevteam.historymod.block.*;
-import com.historydevteam.historymod.block.machines.kiln.BlockKiln;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -65,7 +64,18 @@ public class Blocks {
       .setName("firepit")
       .hasModel();
 
-  public static final Block CLAY_KILN = new BlockKiln("clay_kiln");
+  public static final Block UNFIRED_CLAY_KILN = new BlockRotable(Material.CLAY)
+      .setName("unfired_clay_kiln")
+      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
+      .hasModel()
+      .setHardness(4.0F);
+
+  public static final Block FIRED_CLAY_KILN = new BlockKiln(Material.ROCK)
+      .hasGui()
+      .setName("fired_clay_kiln")
+      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.STONE)
+      .hasModel()
+      .setHardness(5.0F);
 
   public static final Block PRIMITIVE_WORKBENCH = new HMBlock(Material.WOOD)
       .setName("primitive_workbench")

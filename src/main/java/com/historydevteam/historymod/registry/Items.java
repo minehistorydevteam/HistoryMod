@@ -1,6 +1,5 @@
 package com.historydevteam.historymod.registry;
 
-import com.historydevteam.historymod.item.ItemPebble;
 import com.historydevteam.historymod.item.ItemQuartziteArmor;
 import com.historydevteam.historymod.item.ItemSpear;
 import com.historydevteam.historymod.item.ItemTatteredClothArmor;
@@ -46,7 +45,6 @@ public class Items {
   public static final Item PRIMITIVE_HAMMER = create("primitive_hammer", Reference.HISTORY_CREATIVE_TAB);
   public static final Item STONE_DAGGER = create("stone_dagger", Reference.HISTORY_CREATIVE_TAB);
   public static final Item ATL_ATL = create("atl_atl", Reference.HISTORY_CREATIVE_TAB);
-  public static final Item PEBBLE = new ItemPebble("pebble", Reference.HISTORY_CREATIVE_TAB);
 
   private static Item create(String name, CreativeTabs tabs) {
     return new Item()

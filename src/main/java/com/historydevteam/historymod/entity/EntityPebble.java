@@ -1,6 +1,6 @@
 package com.historydevteam.historymod.entity;
 
-import com.historydevteam.historymod.registry.Items;
+import com.historydevteam.historymod.registry.Blocks;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ public class EntityPebble extends EntityArrow {
 
     @Override
     protected ItemStack getArrowStack() {
-        return new ItemStack(Items.PEBBLE, 1);
+        return new ItemStack(Blocks.PEBBLES, 1);
     }
 
     public EntityPebble(World worldIn, double x, double y, double z) {
