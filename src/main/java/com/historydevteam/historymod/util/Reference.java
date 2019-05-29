@@ -12,6 +12,6 @@ public class Reference {
   public static final String CLIENT_PROXY_CLASS = "com.historydevteam.historymod.proxy.ClientProxy";
   public static final String COMMON_PROXY_CLASS = "com.historydevteam.historymod.proxy.CommonProxy";
   public static final CreativeTabs HISTORY_CREATIVE_TAB = new HistoryModCreativeTabs();
-
+  public static final int GUI_CLAY_KILN = 0;
 
 }
