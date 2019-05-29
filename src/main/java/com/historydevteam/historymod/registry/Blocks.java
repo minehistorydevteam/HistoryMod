@@ -29,13 +29,13 @@ public class Blocks {
   public static final Block FLINT_ORE = new BlockFragileOre(Material.ROCK)
       .setDrops(Items.FLINT, 4, 6)
       .setName("flint_ore")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.STONE)
+      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
       .setHardness(3.0f);
 
   public static final Block QUARTZITE_ORE = new BlockFragileOre(Material.ROCK)
       .setDrops(QUARTZITE, 4, 6)
       .setName("quartzite_ore")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.STONE)
+      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
       .setHardness(3.0f);
 
   public static final Block RACK = new BlockRotable(Material.ROCK)
