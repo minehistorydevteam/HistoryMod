@@ -16,7 +16,7 @@ public class BlockFlintOre extends Block {
     setTranslationKey(Reference.MOD_ID + ".flint_ore");
     setRegistryName(Reference.MOD_ID, "flint_ore");
     setCreativeTab(Reference.HISTORY_CREATIVE_TAB);
-    setHarvestLevel("pickaxe",2 /*0 is wood/gold, 1 is stone, 2 is iron, 3 is diamond*/);
+    setHarvestLevel("pickaxe",0 /*0 is wood/gold, 1 is stone, 2 is iron, 3 is diamond*/);
     setHardness(3.0f);
   }
 
