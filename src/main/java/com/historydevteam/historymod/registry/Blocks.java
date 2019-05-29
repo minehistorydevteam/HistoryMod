@@ -1,17 +1,8 @@
 package com.historydevteam.historymod.registry;
 
-import java.util.Random;
-
-import com.historydevteam.historymod.block.BlockFlintOre;
-import com.historydevteam.historymod.block.BlockModel;
-import com.historydevteam.historymod.block.BlockPot;
-import com.historydevteam.historymod.block.BlockQuartziteOre;
-import com.historydevteam.historymod.block.BlockRack;
-import com.historydevteam.historymod.block.BlockRotableModel;
-import com.historydevteam.historymod.block.ISpecialItemBlock;
+import com.historydevteam.historymod.block.*;
 import com.historydevteam.historymod.block.machines.kiln.BlockKiln;
 import com.historydevteam.historymod.util.Reference;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -27,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class Blocks {
 
@@ -62,8 +55,7 @@ public class Blocks {
     }
 
 
-  }
-      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
+  }      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
 
   public static final Block FIREPIT = new BlockRotableModel(Material.WOOD, "firepit");
   public static final Block CLAY_KILN = new BlockKiln("clay_kiln");
