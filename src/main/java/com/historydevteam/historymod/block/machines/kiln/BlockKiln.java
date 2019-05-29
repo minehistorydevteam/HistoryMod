@@ -115,7 +115,7 @@ public class BlockKiln extends Block implements ITileEntityProvider {
 	}
 	@Override
 	public IBlockState getStateFromMeta(int meta) {
-		EnumFacing facing = EnumFacing.getFront(meta);
+		EnumFacing facing = EnumFacing.byIndex(meta);
 		if(facing.getAxis()==EnumFacing.Axis.Y) facing=EnumFacing.NORTH;
 		return this.getDefaultState().withProperty(FACING, facing);
 	}
