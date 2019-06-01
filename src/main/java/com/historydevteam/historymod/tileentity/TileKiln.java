@@ -12,7 +12,7 @@ import net.minecraft.util.ITickable;
 public class TileKiln extends HMTileEntity implements ITickable {
   public Inventory inventory = new Inventory(3);
 
-  public final ModuleInventory moduleInv = new ModuleInventory(inventory);
+  public final ModuleInventory moduleInv = new ModuleInventory(inventory, new int[]{0, 2}, new int[]{1});
   public final ModuleFuelSlot moduleFuelSlot = new ModuleFuelSlot(inventory, 2);
   public final ModuleTimedCrafting moduleCraft = new ModuleTimedCrafting(
       new KilnCraftingProcess(inventory, 0, 1),
@@ -27,7 +27,7 @@ public class TileKiln extends HMTileEntity implements ITickable {
 
   @Override
   public void update() {
-    if(Debug.DEV_ENV){
+    if (Debug.DEV_ENV) {
       // TODO add proper GUI synchronization,
       // for now just update every tick,
       // but only in debug mode or this could kill a server easily

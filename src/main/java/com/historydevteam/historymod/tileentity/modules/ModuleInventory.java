@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.tileentity.containers.Inventory;
+import com.historydevteam.historymod.tileentity.containers.InventoryView;
 import com.historydevteam.historymod.util.WorldUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -14,16 +15,22 @@ import net.minecraftforge.items.ItemStackHandler;
  * - Save/loading of the inventory contents
  * - Item drop when the block is mined
  * - Provides access to the inventory contents using Capabilities
- *
+ * <p>
  * Note: don't include more than 1 inventory module,
  * instead use a bigger inventory with controlled access.
  */
 public class ModuleInventory extends AbstractModule {
 
   private Inventory inventory;
+  private InventoryView view;
 
-  public ModuleInventory(Inventory inv) {
-    inventory = inv;
+  public ModuleInventory(Inventory inventory) {
+    this.inventory = inventory;
+  }
+
+  public ModuleInventory(Inventory inventory, int[] inputSlots, int[] outputSlots) {
+    this.inventory = inventory;
+    this.view = new InventoryView(inventory, inputSlots, outputSlots);
   }
 
   public ItemStackHandler getInventory() {
@@ -45,7 +52,7 @@ public class ModuleInventory extends AbstractModule {
   public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
     if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       //noinspection unchecked
-      return (T) inventory;
+      return view != null ? (T) view : (T) inventory;
     }
     return null;
   }

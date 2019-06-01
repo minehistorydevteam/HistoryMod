@@ -5,18 +5,22 @@ import com.historydevteam.historymod.crafting.TimedCrafting;
 import com.historydevteam.historymod.crafting.energy.IEnergySource;
 import net.minecraft.nbt.NBTTagCompound;
 
+/**
+ * This module represents a crafting process that requires energy for a period of time until the process is complete
+ *
+ */
 public class ModuleTimedCrafting extends AbstractModule {
 
   private TimedCrafting process;
   private IEnergySource energy;
-  private float speedMultiplier;
+  private float efficiency;
   private int costPerTick;
   private boolean isCrafting;
 
-  public ModuleTimedCrafting(ICraftingProcess process, IEnergySource energy, float speedMultiplier, int costPerTick) {
+  public ModuleTimedCrafting(ICraftingProcess process, IEnergySource energy, float efficiency, int costPerTick) {
     this.process = new TimedCrafting(process, this::onWorkingTick);
     this.energy = energy;
-    this.speedMultiplier = speedMultiplier;
+    this.efficiency = efficiency;
     this.costPerTick = costPerTick;
   }
 
@@ -26,7 +30,7 @@ public class ModuleTimedCrafting extends AbstractModule {
 
     float decimalSpeed = Math.min(energy.getSpeed(), energy.getMaxEnergyPerTick() / costPerTick);
 
-    float scale = costPerTick / speedMultiplier;
+    float scale = costPerTick / efficiency;
     int speed = (int) (Math.floor(decimalSpeed * scale) / scale);
 
     if (speed > 0) {
@@ -41,7 +45,7 @@ public class ModuleTimedCrafting extends AbstractModule {
   }
 
   public void onWorkingTick(float speed) {
-    energy.useEnergy((int) (speed * costPerTick / speedMultiplier));
+    energy.useEnergy((int) (speed * costPerTick / efficiency));
   }
 
   public float getProcessingPercent() {
