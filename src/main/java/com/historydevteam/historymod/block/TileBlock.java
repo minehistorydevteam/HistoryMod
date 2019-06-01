@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.block;
 
 import com.historydevteam.historymod.HistoryMod;
+import com.historydevteam.historymod.tileentity.HMTileEntity;
 import com.historydevteam.historymod.util.IOnActivate;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.ITileEntityProvider;
@@ -26,6 +27,28 @@ public class TileBlock extends HMBlock implements ITileEntityProvider {
   public TileBlock hasGui() {
     hasGui = true;
     return this;
+  }
+
+
+  @Override
+  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+    if (world.isRemote) {
+      TileEntity tile = world.getTileEntity(pos);
+      if (tile instanceof HMTileEntity) {
+        ((HMTileEntity) tile).onBreak();
+      }
+    }
+    return super.removedByPlayer(state, world, pos, player, willHarvest);
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    TileEntity tile = worldIn.getTileEntity(pos);
+    if (tile instanceof HMTileEntity) {
+      ((HMTileEntity) tile).onBreak();
+    }
+    worldIn.removeTileEntity(pos);
+    super.breakBlock(worldIn, pos, state);
   }
 
   @Override

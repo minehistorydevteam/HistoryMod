@@ -1,31 +1,21 @@
 package com.historydevteam.historymod.tileentity;
 
-import net.minecraft.nbt.NBTTagCompound;
+import com.historydevteam.historymod.tileentity.containers.Inventory;
+import com.historydevteam.historymod.tileentity.modules.ModuleInventory;
 import net.minecraft.util.ITickable;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 
 @Tile(name = "kiln")
 public class TileKiln extends HMTileEntity implements ITickable {
-  private ItemStackHandler inventory = new ItemStackHandler(4);
+  public Inventory inventory = new Inventory(3);
 
-  public IItemHandler getInventory() {
-    return inventory;
+  public final ModuleInventory moduleInv = new ModuleInventory(inventory);
+
+  public TileKiln() {
+    initModules();
   }
 
   @Override
   public void update() {
-  }
-
-  @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    compound.setTag("inv", inventory.serializeNBT());
-    return super.writeToNBT(compound);
-  }
-
-  @Override
-  public void readFromNBT(NBTTagCompound compound) {
-    inventory.deserializeNBT(compound.getCompoundTag("key"));
-    super.readFromNBT(compound);
+    super.update();
   }
 }

@@ -8,10 +8,9 @@ public class ContainerKiln extends HMContainer {
 
   public ContainerKiln(EntityPlayer player, TileKiln tile) {
     super(player, tile);
-    addSlotToContainer(new SlotItemHandler(tile.getInventory(), 0, 8, 55));
-    addSlotToContainer(new SlotItemHandler(tile.getInventory(), 1, 26, 55));
-    addSlotToContainer(new SlotItemHandler(tile.getInventory(), 2, 56, 53));
-    addSlotToContainer(new SlotItemHandler(tile.getInventory(), 3, 116, 35));
+    addSlotToContainer(new SlotItemHandler(tile.inventory, 0, 8, 55));
+    addSlotToContainer(new SlotItemHandler(tile.inventory, 1, 26, 55));
+    addSlotToContainer(new SlotItemHandler(tile.inventory, 2, 56, 53));
 
     addPlayerSlots();
   }
