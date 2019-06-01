@@ -34,10 +34,27 @@ public class HMGui extends GuiContainer {
     mc.getTextureManager().bindTexture(texture);
     GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
     bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-    bufferbuilder.pos(guiLeft, guiTop + ySize, 0.0D).tex(0.0D, (float) height / 32.0F + (float) 0).color(64, 64, 64, 255).endVertex();
-    bufferbuilder.pos(guiLeft + xSize, guiTop + ySize, 0.0D).tex((float) width / 32.0F, (float) height / 32.0F + (float) 0).color(64, 64, 64, 255).endVertex();
-    bufferbuilder.pos(guiLeft + xSize, guiTop, 0.0D).tex((float) width / 32.0F, 0).color(64, 64, 64, 255).endVertex();
-    bufferbuilder.pos(guiLeft, guiTop, 0.0D).tex(0.0D, 0).color(64, 64, 64, 255).endVertex();
+
+    bufferbuilder.pos(guiLeft, guiTop + ySize, 0.0D)
+        .tex(0.0D, ySize / 256.0F)
+        .color(255, 255, 255, 255)
+        .endVertex();
+
+    bufferbuilder.pos(guiLeft + xSize, guiTop + ySize, 0.0D)
+        .tex(xSize / 256.0F, ySize / 256.0F)
+        .color(255, 255, 255, 255)
+        .endVertex();
+
+    bufferbuilder.pos(guiLeft + xSize, guiTop, 0.0D)
+        .tex(xSize / 256.0F, 0)
+        .color(255, 255, 255, 255)
+        .endVertex();
+
+    bufferbuilder.pos(guiLeft, guiTop, 0.0D)
+        .tex(0.0D, 0)
+        .color(255, 255, 255, 255)
+        .endVertex();
+
     tessellator.draw();
   }
 }

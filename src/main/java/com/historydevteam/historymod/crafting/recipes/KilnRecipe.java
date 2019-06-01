@@ -32,4 +32,8 @@ public class KilnRecipe {
   public int getDuration() {
     return duration;
   }
+
+  public boolean matchesInput(ItemStackKey key) {
+    return input.equals(key);
+  }
 }

@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.proxy;
 
 import com.historydevteam.historymod.HistoryMod;
+import com.historydevteam.historymod.crafting.RecipeManager;
 import com.historydevteam.historymod.gui.GuiHandler;
 import com.historydevteam.historymod.registry.CommonRegistry;
 import com.historydevteam.historymod.tileentity.Tile;
@@ -49,6 +50,8 @@ public class CommonProxy {
         e.printStackTrace();
       }
     }
+    // Add recipes
+    RecipeManager.loadRecipes();
   }
 
   public void postInit(FMLPostInitializationEvent event) {

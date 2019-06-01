@@ -14,6 +14,9 @@ import net.minecraftforge.items.ItemStackHandler;
  * - Save/loading of the inventory contents
  * - Item drop when the block is mined
  * - Provides access to the inventory contents using Capabilities
+ *
+ * Note: don't include more than 1 inventory module,
+ * instead use a bigger inventory with controlled access.
  */
 public class ModuleInventory extends AbstractModule {
 

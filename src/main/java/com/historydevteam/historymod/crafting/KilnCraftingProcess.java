@@ -62,12 +62,12 @@ public class KilnCraftingProcess implements ICraftingProcess {
     if (input.isEmpty()) {
       return null;
     }
+    ItemStackKey key = ItemStackKey.asKey(input);
 
-    if (cacheRecipe != null && cacheRecipe.getInput().equals(input)) {
+    if (cacheRecipe != null && cacheRecipe.matchesInput(key)) {
       return cacheRecipe;
     }
 
-    ItemStackKey key = ItemStackKey.of(input);
     KilnRecipe recipe = RecipeManager.KILN_RECIPES.getObject(key);
 
     if (recipe != null) {
@@ -75,5 +75,4 @@ public class KilnCraftingProcess implements ICraftingProcess {
     }
     return recipe;
   }
-
 }

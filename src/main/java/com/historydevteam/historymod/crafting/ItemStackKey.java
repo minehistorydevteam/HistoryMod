@@ -22,6 +22,10 @@ public class ItemStackKey {
     return new ItemStackKey(stack.getItem().getRegistryName(), stack.getCount(), stack.getItemDamage());
   }
 
+  public static ItemStackKey asKey(ItemStack stack) {
+    return new ItemStackKey(stack.getItem().getRegistryName(), -1, -1);
+  }
+
   public ItemStack toStack() {
     Item item = Item.REGISTRY.getObject(registryName);
     if (item == null) {
@@ -35,13 +39,13 @@ public class ItemStackKey {
     if (this == o) return true;
     if (!(o instanceof ItemStackKey)) return false;
     ItemStackKey that = (ItemStackKey) o;
-    return count == that.count &&
-        itemDamage == that.itemDamage &&
+    return (count == that.count || count == -1 || that.count == -1) &&
+        (itemDamage == that.itemDamage || itemDamage == -1 || that.itemDamage == -1) &&
         registryName.equals(that.registryName);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(registryName, count, itemDamage);
+    return Objects.hash(registryName);
   }
 }
