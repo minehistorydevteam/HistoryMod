@@ -1,7 +1,9 @@
 package com.historydevteam.historymod.tileentity;
 
 import com.historydevteam.historymod.tileentity.modules.IModule;
+import com.historydevteam.historymod.util.IVariable;
 import com.historydevteam.historymod.util.RegistryUtil;
+import com.historydevteam.historymod.util.Sync;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,15 +13,18 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import org.apache.commons.lang3.tuple.Pair;
 
 import javax.annotation.Nullable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HMTileEntity extends TileEntity {
   protected List<IModule> modules;
 
-  protected void initModules(){
-    if (modules == null){
+  protected void initModules() {
+    if (modules == null) {
       modules = RegistryUtil.getObjectsFromFields(this, IModule.class);
       for (IModule module : modules) {
         module.setTileEntity(this);
@@ -173,5 +178,17 @@ public class HMTileEntity extends TileEntity {
     }
 
     super.readFromNBT(compound);
+  }
+
+  public Map<Integer, IVariable> getGuiSyncVariables() {
+    Map<Integer, IVariable> map = new HashMap<>();
+
+    for (IModule module : modules) {
+      for (Pair<Sync, IVariable> pair : RegistryUtil.getVariablesMarkedWithAnnotation(Sync.class, module)) {
+        map.put(pair.getKey().id(), pair.getValue());
+      }
+    }
+
+    return map;
   }
 }

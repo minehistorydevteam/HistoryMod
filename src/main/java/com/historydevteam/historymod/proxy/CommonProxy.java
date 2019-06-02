@@ -3,6 +3,7 @@ package com.historydevteam.historymod.proxy;
 import com.historydevteam.historymod.HistoryMod;
 import com.historydevteam.historymod.crafting.RecipeManager;
 import com.historydevteam.historymod.gui.GuiHandler;
+import com.historydevteam.historymod.proxy.network.HMNetworkManager;
 import com.historydevteam.historymod.registry.CommonRegistry;
 import com.historydevteam.historymod.tileentity.Tile;
 import com.historydevteam.historymod.util.Reference;
@@ -52,6 +53,9 @@ public class CommonProxy {
     }
     // Add recipes
     RecipeManager.loadRecipes();
+
+    // Register packets
+    HMNetworkManager.init();
   }
 
   public void postInit(FMLPostInitializationEvent event) {

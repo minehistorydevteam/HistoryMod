@@ -1,5 +1,8 @@
 package com.historydevteam.historymod.util;
 
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -37,6 +40,48 @@ public class RegistryUtil {
         } catch (IllegalAccessException e) {
           System.err.println("Unable to access object in field: " + field.toString());
         }
+      }
+    }
+
+    return list;
+  }
+
+  public static <T extends Annotation> List<Pair<T, IVariable>> getVariablesMarkedWithAnnotation(Class<T> annotation, Object obj) {
+    List<Pair<T, IVariable>> list = new ArrayList<>();
+
+    for (Field field : obj.getClass().getDeclaredFields()) {
+      if (!Modifier.isStatic(field.getModifiers()) && field.isAnnotationPresent(annotation)) {
+        field.setAccessible(true);
+
+        T annot = field.getAnnotation(annotation);
+        IVariable var = new IVariable() {
+
+          @Override
+          public String getName() {
+            return field.getName();
+          }
+
+          @Override
+          public void setValue(Object value) {
+            try {
+              field.set(obj, value);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            }
+          }
+
+          @Override
+          public Object getValue() {
+            try {
+              return field.get(obj);
+            } catch (IllegalAccessException e) {
+              e.printStackTrace();
+            }
+            return null;
+          }
+        };
+
+        list.add(Pair.of(annot, var));
       }
     }
 

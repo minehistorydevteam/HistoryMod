@@ -126,6 +126,10 @@ public class IBD {
     return this;
   }
 
+  public boolean hasKey(int key) {
+    return map.containsKey(key);
+  }
+
   public void addAll(IBD other) {
     other.map.forEach((k, v) -> map.put(k, v));
   }
@@ -264,6 +268,38 @@ public class IBD {
       } else {
         throw new IllegalStateException("Unknown object type: " + obj.getClass() + " at key: " + entry.getKey());
       }
+    }
+  }
+
+  public void setObject(int key, Object obj) {
+    if (obj instanceof Byte) {
+      setByte(key, (Byte) obj);
+    } else if (obj instanceof Short) {
+      setShort(key, (Short) obj);
+    } else if (obj instanceof Integer) {
+      setInteger(key, (Integer) obj);
+    } else if (obj instanceof Long) {
+      setLong(key, (Long) obj);
+    } else if (obj instanceof Float) {
+      setFloat(key, (Float) obj);
+    } else if (obj instanceof Double) {
+      setDouble(key, (Double) obj);
+    } else if (obj instanceof Boolean) {
+      setBoolean(key, (Boolean) obj);
+    } else if (obj instanceof String) {
+      setString(key, (String) obj);
+    } else if (obj instanceof byte[]) {
+      setByteArray(key, (byte[]) obj);
+    } else if (obj instanceof int[]) {
+      setIntArray(key, (int[]) obj);
+    } else {
+      throw new IllegalStateException("Unknown object type: " + obj.getClass() + " at key: " + key);
+    }
+  }
+
+  public void withObject(int key, Consumer<Object> action) {
+    if (map.containsKey(key)) {
+      action.accept(map.get(key));
     }
   }
 }

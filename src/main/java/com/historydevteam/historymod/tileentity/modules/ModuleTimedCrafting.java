@@ -3,11 +3,12 @@ package com.historydevteam.historymod.tileentity.modules;
 import com.historydevteam.historymod.crafting.ICraftingProcess;
 import com.historydevteam.historymod.crafting.TimedCrafting;
 import com.historydevteam.historymod.crafting.energy.IEnergySource;
+import com.historydevteam.historymod.util.Reference;
+import com.historydevteam.historymod.util.Sync;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * This module represents a crafting process that requires energy for a period of time until the process is complete
- *
  */
 public class ModuleTimedCrafting extends AbstractModule {
 
@@ -16,6 +17,8 @@ public class ModuleTimedCrafting extends AbstractModule {
   private float efficiency;
   private int costPerTick;
   private boolean isCrafting;
+  @Sync(id = Reference.SYNC_CRAFTING_PROGRESS)
+  private float craftingProgress;
 
   public ModuleTimedCrafting(ICraftingProcess process, IEnergySource energy, float efficiency, int costPerTick) {
     this.process = new TimedCrafting(process, this::onWorkingTick);
@@ -37,6 +40,7 @@ public class ModuleTimedCrafting extends AbstractModule {
       process.tick(getWorld(), speed);
     }
 
+    craftingProgress = process.getProcessingPercent();
     boolean working = process.isCrafting(getWorld());
     if (working != isCrafting) {
       isCrafting = working;
@@ -49,7 +53,7 @@ public class ModuleTimedCrafting extends AbstractModule {
   }
 
   public float getProcessingPercent() {
-    return process.getProcessingPercent();
+    return craftingProgress;
   }
 
   @Override

@@ -5,7 +5,6 @@ import com.historydevteam.historymod.tileentity.containers.Inventory;
 import com.historydevteam.historymod.tileentity.modules.ModuleFuelSlot;
 import com.historydevteam.historymod.tileentity.modules.ModuleInventory;
 import com.historydevteam.historymod.tileentity.modules.ModuleTimedCrafting;
-import com.historydevteam.historymod.util.Debug;
 import net.minecraft.util.ITickable;
 
 @Tile(name = "kiln")
@@ -27,12 +26,6 @@ public class TileKiln extends HMTileEntity implements ITickable {
 
   @Override
   public void update() {
-    if (Debug.DEV_ENV) {
-      // TODO add proper GUI synchronization,
-      // for now just update every tick,
-      // but only in debug mode or this could kill a server easily
-      sendUpdateToNearPlayers();
-    }
     super.update();
   }
 }

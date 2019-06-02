@@ -1,19 +1,23 @@
 package com.historydevteam.historymod.gui;
 
+import com.historydevteam.historymod.proxy.network.HMNetworkManager;
 import com.historydevteam.historymod.tileentity.HMTileEntity;
+import com.historydevteam.historymod.util.IBD;
+import com.historydevteam.historymod.util.IVariable;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public abstract class HMContainer extends Container {
 
   protected HMTileEntity tile;
   protected EntityPlayer player;
   protected List<InventoryRegion> regions = new ArrayList<>();
+  protected Map<Integer, Object> lastState = new HashMap<>();
 
   public HMContainer(EntityPlayer player, HMTileEntity tile) {
     this.tile = tile;
@@ -63,6 +67,42 @@ public abstract class HMContainer extends Container {
       }
     }
     return ItemStack.EMPTY;
+  }
+
+  @Override
+  public void detectAndSendChanges() {
+    if (tile != null && player instanceof EntityPlayerMP) {
+      Map<Integer, IVariable> map = tile.getGuiSyncVariables();
+      IBD data = new IBD();
+      int count = 0;
+
+      for (Map.Entry<Integer, IVariable> entry : map.entrySet()) {
+        Object lastValue = lastState.get(entry.getKey());
+        Object currentValue = entry.getValue().getValue();
+
+        if (!Objects.equals(lastValue, currentValue)) {
+          data.setObject(entry.getKey(), currentValue);
+          lastState.put(entry.getKey(), currentValue);
+          count++;
+        }
+      }
+
+      if (count > 0) {
+        HMNetworkManager.sendContainerUpdate((EntityPlayerMP) player, data);
+      }
+    }
+    super.detectAndSendChanges();
+  }
+
+  public void receiveDataFromServer(IBD data) {
+    // Do nothing by default, subclasses must override
+    if (tile != null) {
+      Map<Integer, IVariable> map = tile.getGuiSyncVariables();
+
+      for (Map.Entry<Integer, IVariable> entry : map.entrySet()) {
+        data.withObject(entry.getKey(), value -> entry.getValue().setValue(value));
+      }
+    }
   }
 
   private boolean tryMergeItemStack(ItemStack stack, int index, List<InventoryRegion> regions) {

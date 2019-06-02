@@ -14,4 +14,7 @@ public class Reference {
   public static final CreativeTabs HISTORY_CREATIVE_TAB = new HistoryModCreativeTabs();
   public static final int GUI_TILE_ENTITY = 1;
 
+  public static final int SYNC_BURN_TIME = 0;
+  public static final int SYNC_MAX_BURN_TIME = 1;
+  public static final int SYNC_CRAFTING_PROGRESS = 2;
 }

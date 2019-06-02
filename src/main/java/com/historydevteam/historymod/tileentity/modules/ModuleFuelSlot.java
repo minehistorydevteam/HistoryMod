@@ -2,6 +2,8 @@ package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.crafting.energy.IEnergySource;
 import com.historydevteam.historymod.tileentity.containers.Inventory;
+import com.historydevteam.historymod.util.Reference;
+import com.historydevteam.historymod.util.Sync;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntityFurnace;
@@ -10,8 +12,12 @@ public class ModuleFuelSlot extends AbstractModule implements IEnergySource {
 
   private Inventory inventory;
   private int slot;
+
+  @Sync(id = Reference.SYNC_BURN_TIME)
   private int burnTime;
+  @Sync(id = Reference.SYNC_MAX_BURN_TIME)
   private int maxBurnTime;
+
   private int cooldown;
 
   public ModuleFuelSlot(Inventory inventory, int slot) {
