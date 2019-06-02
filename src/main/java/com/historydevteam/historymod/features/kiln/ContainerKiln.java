@@ -1,8 +1,11 @@
-package com.historydevteam.historymod.gui;
+package com.historydevteam.historymod.features.kiln;
 
 import com.historydevteam.historymod.crafting.ItemStackKey;
 import com.historydevteam.historymod.crafting.RecipeManager;
-import com.historydevteam.historymod.tileentity.TileKiln;
+import com.historydevteam.historymod.gui.HMContainer;
+import com.historydevteam.historymod.gui.HMGui;
+import com.historydevteam.historymod.gui.InventoryRegion;
+import com.historydevteam.historymod.gui.SlotTakeOnly;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.items.SlotItemHandler;

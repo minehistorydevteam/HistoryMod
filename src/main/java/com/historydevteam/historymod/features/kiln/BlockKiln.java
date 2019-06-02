@@ -1,6 +1,7 @@
-package com.historydevteam.historymod.block;
+package com.historydevteam.historymod.features.kiln;
 
-import com.historydevteam.historymod.tileentity.TileKiln;
+import com.historydevteam.historymod.block.BlockProperties;
+import com.historydevteam.historymod.block.TileBlock;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockStateContainer;
@@ -33,6 +34,7 @@ public class BlockKiln extends TileBlock implements ITileEntityProvider {
     return new BlockStateContainer(this, BlockProperties.BURNING, BlockProperties.ORIENTATION);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public IBlockState getStateFromMeta(int meta) {
     boolean burning = (meta & 0b1000) > 0;
@@ -51,11 +53,13 @@ public class BlockKiln extends TileBlock implements ITileEntityProvider {
     return dir.getHorizontalIndex() | (burning ? 0b1000 : 0b000);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public IBlockState withRotation(IBlockState state, Rotation rot) {
     return state.withProperty(BlockProperties.ORIENTATION, rot.rotate(state.getValue(BlockProperties.ORIENTATION)));
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
     return state.withRotation(mirrorIn.toRotation(state.getValue(BlockProperties.ORIENTATION)));

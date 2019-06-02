@@ -14,7 +14,7 @@ import java.util.*;
 
 public abstract class HMContainer extends Container {
 
-  protected HMTileEntity tile;
+  public HMTileEntity tile;
   protected EntityPlayer player;
   protected List<InventoryRegion> regions = new ArrayList<>();
   protected Map<Integer, Object> lastState = new HashMap<>();

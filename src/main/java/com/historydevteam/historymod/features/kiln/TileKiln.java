@@ -1,6 +1,8 @@
-package com.historydevteam.historymod.tileentity;
+package com.historydevteam.historymod.features.kiln;
 
 import com.historydevteam.historymod.crafting.KilnCraftingProcess;
+import com.historydevteam.historymod.tileentity.HMTileEntity;
+import com.historydevteam.historymod.tileentity.Tile;
 import com.historydevteam.historymod.tileentity.containers.Inventory;
 import com.historydevteam.historymod.tileentity.modules.ModuleFuelSlot;
 import com.historydevteam.historymod.tileentity.modules.ModuleInventory;

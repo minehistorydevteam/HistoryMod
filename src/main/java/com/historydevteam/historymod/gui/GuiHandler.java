@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.gui;
 
-import com.historydevteam.historymod.tileentity.TileKiln;
+import com.historydevteam.historymod.features.kiln.ContainerKiln;
+import com.historydevteam.historymod.features.kiln.TileKiln;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;

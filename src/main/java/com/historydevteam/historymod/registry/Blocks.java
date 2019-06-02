@@ -1,6 +1,7 @@
 package com.historydevteam.historymod.registry;
 
 import com.historydevteam.historymod.block.*;
+import com.historydevteam.historymod.features.kiln.BlockKiln;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

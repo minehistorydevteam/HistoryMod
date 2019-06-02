@@ -1,6 +1,6 @@
-package com.historydevteam.historymod.gui;
+package com.historydevteam.historymod.features.kiln;
 
-import com.historydevteam.historymod.tileentity.TileKiln;
+import com.historydevteam.historymod.gui.HMGui;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.util.ResourceLocation;
 

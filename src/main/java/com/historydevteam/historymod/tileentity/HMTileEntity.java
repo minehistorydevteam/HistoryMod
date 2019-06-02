@@ -38,7 +38,7 @@ public class HMTileEntity extends TileEntity {
   public void update() {
     // NOTE: It's really important that if you implement ITickable you must override this method,
     // otherwise this method will crash when running outside the development environment
-    // This is because the name of update in ITickable is obfuscated outside the development environment
+    // This is happens because the name of update in ITickable is obfuscated outside the development environment
 
     for (IModule module : modules) {
       module.update();
