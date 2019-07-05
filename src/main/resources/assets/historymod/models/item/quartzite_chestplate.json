@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/quartzite_chestplate"
+    "layer0": "historymod:item/quartzite_chestplate"
   }
 }

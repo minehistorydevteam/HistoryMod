@@ -2,15 +2,15 @@ package com.historydevteam.historymod.util;
 
 import com.google.common.collect.Maps;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IResource;
-import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.nbt.NBTTagString;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.nbt.StringNBT;
+import net.minecraft.resources.IResource;
+import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,20 +27,20 @@ public enum LoreHelper {
   public static void setItemLore(ItemStack stack, List<String> lore) {
     if (stack.isEmpty()) return;
 
-    NBTTagCompound nbt = new NBTTagCompound();
-    NBTTagList list = new NBTTagList();
+    CompoundNBT nbt = new CompoundNBT();
+    ListNBT list = new ListNBT();
 
     for (String l : lore) {
-      list.appendTag(new NBTTagString(l));
+      list.add(new StringNBT(l));
     }
 
-    nbt.setTag("Lore", list);
+    nbt.put("Lore", list);
     stack.setTagInfo("display", nbt);
   }
 
   public void loadLoreFile() {
 
-    IResourceManager rm = Minecraft.getMinecraft().getResourceManager();
+    IResourceManager rm = Minecraft.getInstance().getResourceManager();
     itemsLore.clear();
 
     try {

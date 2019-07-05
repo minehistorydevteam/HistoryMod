@@ -1,18 +1,19 @@
 package com.historydevteam.historymod.util;
 
-import net.minecraft.block.state.IBlockState;
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.block.model.BakedQuad;
-import net.minecraft.client.renderer.block.model.IBakedModel;
+import net.minecraft.client.renderer.model.BakedQuad;
+import net.minecraft.client.renderer.model.IBakedModel;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.Vec3d;
 import org.lwjgl.opengl.GL11;
 
 import java.util.List;
+import java.util.Random;
 
 public class ModelUtilities {
 
@@ -26,7 +27,7 @@ public class ModelUtilities {
    * @param side  second arg to model.getQuads
    * @param rand  third arg to model.getQuads
    */
-  public static void renderModel(IBakedModel model, IBlockState state, EnumFacing side, Long rand) {
+  public static void renderModel(IBakedModel model, BlockState state, Direction side, Random rand) {
     Tessellator tessellator = Tessellator.getInstance();
     BufferBuilder buffer = tessellator.getBuffer();
     List<BakedQuad> storage = model.getQuads(state, side, rand);
@@ -58,11 +59,11 @@ public class ModelUtilities {
    * @param rand  third arg to model.getQuads
    * @return the id of the display list
    */
-  public static int createDisplayList(IBakedModel model, IBlockState state, EnumFacing side, Long rand) {
-    int list = GlStateManager.glGenLists(1);
-    GlStateManager.glNewList(list, GL11.GL_COMPILE);
+  public static int createDisplayList(IBakedModel model, BlockState state, Direction side, Random rand) {
+    int list = GlStateManager.genLists(1);
+    GlStateManager.newList(list, GL11.GL_COMPILE);
     renderModel(model, state, side, rand);
-    GlStateManager.glEndList();
+    GlStateManager.endList();
 
     return list;
   }
@@ -87,9 +88,9 @@ public class ModelUtilities {
     float a = 1f;
 
     GlStateManager.bindTexture(0);
-    GlStateManager.glLineWidth(2f);
+    GlStateManager.lineWidth(2f);
     GlStateManager.enableColorMaterial();
-    GlStateManager.enableOutlineMode(0xFF_FF_FF_FF);
+    GlStateManager.setupSolidRenderingTextureCombine(0xFF_FF_FF_FF);
 
     t.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION_COLOR);
     t.pos(box.minX, box.minY, box.minZ).color(r, g, b, a).endVertex();
@@ -130,7 +131,7 @@ public class ModelUtilities {
 
     tes.draw();
 
-    GlStateManager.disableOutlineMode();
+    GlStateManager.tearDownSolidRenderingTextureCombine();
     GlStateManager.disableColorMaterial();
   }
 }

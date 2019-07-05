@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/tattered_cloth_leggings"
+    "layer0": "historymod:item/tattered_cloth_leggings"
   }
 }

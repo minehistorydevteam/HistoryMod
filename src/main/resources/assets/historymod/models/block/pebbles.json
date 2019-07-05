@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "historymod:blocks/pebbles",
-		"particle": "historymod:blocks/pebbles"
+		"1": "historymod:block/pebbles",
+		"particle": "historymod:block/pebbles"
 	},
 	"elements": [
 		{

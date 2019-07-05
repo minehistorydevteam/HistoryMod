@@ -1,11 +1,11 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "historymod:clay_kiln",
+    "model": "historymod:block/clay_kiln",
     "transform": "forge:default-block",
     "textures": {
-      "4": "historymod:blocks/fired_clay_kiln",
-      "particle": "historymod:blocks/fired_clay_kiln"
+      "4": "historymod:block/fired_clay_kiln",
+      "particle": "historymod:block/fired_clay_kiln"
     }
   },
   "variants": {
@@ -16,7 +16,6 @@
     "burning=false,orientation=north": [{ "y": 180 }],
     "burning=false,orientation=south": [{ "y": 0 }],
     "burning=false,orientation=east": [{ "y": 270 }],
-    "burning=false,orientation=west": [{ "y": 90 }],
-    "normal": [{}]
+    "burning=false,orientation=west": [{ "y": 90 }]
   }
 }

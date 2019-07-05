@@ -1,7 +1,7 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "historymod:items/thrown_spear"
+		"1": "historymod:item/thrown_spear"
 	},
 	"elements": [
 		{

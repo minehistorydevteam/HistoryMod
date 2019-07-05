@@ -1,9 +1,10 @@
+/*
 package com.historydevteam.historymod.features.kiln;
 
 import com.historydevteam.historymod.crafting.ItemStackKey;
 import com.historydevteam.historymod.crafting.RecipeManager;
 import com.historydevteam.historymod.gui.HMContainer;
-import com.historydevteam.historymod.gui.HMGui;
+import com.historydevteam.historymod.gui.HMContainerScreen;
 import com.historydevteam.historymod.gui.InventoryRegion;
 import com.historydevteam.historymod.gui.SlotTakeOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,7 +35,8 @@ public class ContainerKiln extends HMContainer {
   }
 
   @Override
-  public HMGui createGui() {
+  public HMContainerScreen createGui() {
     return new GuiKiln(this);
   }
 }
+*/

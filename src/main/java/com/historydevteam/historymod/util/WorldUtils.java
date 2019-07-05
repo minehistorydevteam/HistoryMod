@@ -1,8 +1,9 @@
 package com.historydevteam.historymod.util;
 
-import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class WorldUtils {
@@ -25,13 +26,11 @@ public class WorldUtils {
       d2 = (world.rand.nextFloat() * f) + (1.0f - f) * 0.5;
     }
 
-    EntityItem entityItem = new EntityItem(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, item);
+    ItemEntity entityItem = new ItemEntity(world, pos.getX() + d0, pos.getY() + d1, pos.getZ() + d2, item);
     entityItem.setDefaultPickupDelay();
     if (!jump) {
-      entityItem.motionX = 0;
-      entityItem.motionY = 0;
-      entityItem.motionZ = 0;
+      entityItem.setMotion(Vec3d.ZERO);
     }
-    world.spawnEntity(entityItem);
+    world.addEntity(entityItem);
   }
 }

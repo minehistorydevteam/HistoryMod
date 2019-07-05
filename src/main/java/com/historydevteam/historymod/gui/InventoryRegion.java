@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.gui;
 
 import net.minecraft.item.ItemStack;
@@ -24,3 +25,4 @@ public class InventoryRegion {
     this.filter = filter;
   }
 }
+*/

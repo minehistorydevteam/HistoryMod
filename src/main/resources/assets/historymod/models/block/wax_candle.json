@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"1": "historymod:blocks/wax_candle",
-		"particle": "historymod:blocks/wax_candle"
+		"1": "historymod:block/wax_candle",
+		"particle": "historymod:block/wax_candle"
 	},
 	"elements": [
 		{

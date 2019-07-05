@@ -8,7 +8,6 @@
     "orientation=north": [{ "y": 0 }],
     "orientation=south": [{ "y": 180 }],
     "orientation=east": [{ "y": 90 }],
-    "orientation=west": [{ "y": 270 }],
-    "normal": [{}]
+    "orientation=west": [{ "y": 270 }]
   }
 }

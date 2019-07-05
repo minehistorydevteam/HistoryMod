@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/atl_atl"
+    "layer0": "historymod:item/atl_atl"
   }
 }

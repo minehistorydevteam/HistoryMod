@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/beads"
+    "layer0": "historymod:item/beads"
   }
 }

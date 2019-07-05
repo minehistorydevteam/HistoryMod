@@ -1,27 +1,21 @@
-package com.historydevteam.historymod.block;
+/*package com.historydevteam.historymod.block;
 
-import com.historydevteam.historymod.HistoryMod;
-import com.historydevteam.historymod.tileentity.HMTileEntity;
 import com.historydevteam.historymod.util.IOnActivate;
-import com.historydevteam.historymod.util.Reference;
-import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.block.BlockState;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.IFluidState;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
 
-public class TileBlock extends HMBlock implements ITileEntityProvider {
+public class TileBlock extends HMBlock {
 
-  private ITileEntityProvider provider;
   private boolean hasGui;
 
-  public TileBlock(Material materialIn, ITileEntityProvider provider) {
+  public TileBlock(Properties materialIn) {
     super(materialIn);
-    this.provider = provider;
   }
 
   public TileBlock hasGui() {
@@ -29,30 +23,29 @@ public class TileBlock extends HMBlock implements ITileEntityProvider {
     return this;
   }
 
-
   @Override
-  public boolean removedByPlayer(IBlockState state, World world, BlockPos pos, EntityPlayer player, boolean willHarvest) {
+  public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, IFluidState fluidState) {
     if (world.isRemote) {
       TileEntity tile = world.getTileEntity(pos);
       if (tile instanceof HMTileEntity) {
         ((HMTileEntity) tile).onBreak();
       }
     }
-    return super.removedByPlayer(state, world, pos, player, willHarvest);
+    return super.removedByPlayer(state, world, pos, player, willHarvest, fluidState);
   }
 
   @Override
-  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+  public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState,
+      boolean isMoving) {
     TileEntity tile = worldIn.getTileEntity(pos);
-    if (tile instanceof HMTileEntity) {
+    if(tile instanceof HMTileEntity) {
       ((HMTileEntity) tile).onBreak();
     }
     worldIn.removeTileEntity(pos);
-    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
-  public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+  public boolean onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn, Hand hand, BlockRayTraceResult result) {
     TileEntity tile = worldIn.getTileEntity(pos);
     if (tile instanceof IOnActivate) {
       if (((IOnActivate) tile).onActivated(playerIn)) {
@@ -62,7 +55,7 @@ public class TileBlock extends HMBlock implements ITileEntityProvider {
 
     if (hasGui) {
       if (!worldIn.isRemote) {
-        playerIn.openGui(HistoryMod.instance, Reference.GUI_TILE_ENTITY, worldIn, pos.getX(), pos.getY(), pos.getZ());
+        //playerIn.openContainer(HistoryMod.instance, Reference.GUI_TILE_ENTITY, worldIn, pos.getX(), pos.getY(), pos.getZ());
       }
       return true;
     }
@@ -70,7 +63,8 @@ public class TileBlock extends HMBlock implements ITileEntityProvider {
   }
 
   @Override
-  public TileEntity createNewTileEntity(World worldIn, int meta) {
-    return provider.createNewTileEntity(worldIn, meta);
+  public boolean hasTileEntity(BlockState state) {
+    return true;
   }
 }
+*/

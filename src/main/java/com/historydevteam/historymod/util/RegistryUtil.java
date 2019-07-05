@@ -10,10 +10,10 @@ import java.util.List;
 
 public class RegistryUtil {
 
-  public static <T> List<T> getObjectsFromStaticFields(Class file, Class<T> type) {
+  public static <T> List<T> getObjectsFromStaticFields(Class from, Class<T> type) {
     List<T> list = new ArrayList<>();
 
-    for (Field field : file.getDeclaredFields()) {
+    for (Field field : from.getDeclaredFields()) {
       if (Modifier.isStatic(field.getModifiers()) && type.isAssignableFrom(field.getType())) {
         field.setAccessible(true);
         try {
@@ -46,15 +46,15 @@ public class RegistryUtil {
     return list;
   }
 
-  public static <T extends Annotation> List<Pair<T, IVariable>> getVariablesMarkedWithAnnotation(Class<T> annotation, Object obj) {
-    List<Pair<T, IVariable>> list = new ArrayList<>();
+  public static <T extends Annotation> List<Pair<T, IField<Object>>> getVariablesMarkedWithAnnotation(Class<T> annotation, Object obj) {
+    List<Pair<T, IField<Object>>> list = new ArrayList<>();
 
     for (Field field : obj.getClass().getDeclaredFields()) {
       if (!Modifier.isStatic(field.getModifiers()) && field.isAnnotationPresent(annotation)) {
         field.setAccessible(true);
 
         T annot = field.getAnnotation(annotation);
-        IVariable var = new IVariable() {
+        IField<Object> var = new IField<Object>() {
 
           @Override
           public String getName() {

@@ -1,0 +1,7 @@
+{
+    "parent": "historymod:block/clay_kiln",
+    "textures": {
+        "4": "historymod:block/unfired_clay_kiln",
+        "particle": "historymod:block/unfired_clay_kiln"
+    }
+}

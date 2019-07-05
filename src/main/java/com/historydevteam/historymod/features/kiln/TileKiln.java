@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.features.kiln;
 
 import com.historydevteam.historymod.crafting.KilnCraftingProcess;
@@ -7,10 +8,10 @@ import com.historydevteam.historymod.tileentity.containers.Inventory;
 import com.historydevteam.historymod.tileentity.modules.ModuleFuelSlot;
 import com.historydevteam.historymod.tileentity.modules.ModuleInventory;
 import com.historydevteam.historymod.tileentity.modules.ModuleTimedCrafting;
-import net.minecraft.util.ITickable;
+import net.minecraft.tileentity.ITickableTileEntity;
 
 @Tile(name = "kiln")
-public class TileKiln extends HMTileEntity implements ITickable {
+public class TileKiln extends HMTileEntity implements ITickableTileEntity {
   public Inventory inventory = new Inventory(3);
 
   public final ModuleInventory moduleInv = new ModuleInventory(inventory, new int[]{0, 2}, new int[]{1});
@@ -23,6 +24,7 @@ public class TileKiln extends HMTileEntity implements ITickable {
   );
 
   public TileKiln() {
+    super(Tile);
     initModules();
   }
 
@@ -30,4 +32,9 @@ public class TileKiln extends HMTileEntity implements ITickable {
   public void update() {
     super.update();
   }
-}
+
+  @Override
+  public void tick() {
+
+  }
+}*/

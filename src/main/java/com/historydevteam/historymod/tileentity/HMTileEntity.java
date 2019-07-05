@@ -1,20 +1,23 @@
+/*
 package com.historydevteam.historymod.tileentity;
 
 import com.historydevteam.historymod.tileentity.modules.IModule;
-import com.historydevteam.historymod.util.IVariable;
+import com.historydevteam.historymod.util.IField;
 import com.historydevteam.historymod.util.RegistryUtil;
 import com.historydevteam.historymod.util.Sync;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.world.World;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import org.apache.commons.lang3.tuple.Pair;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +25,10 @@ import java.util.Map;
 
 public class HMTileEntity extends TileEntity {
   protected List<IModule> modules;
+
+  public HMTileEntity(TileEntityType<?> tileEntityTypeIn) {
+    super(tileEntityTypeIn);
+  }
 
   protected void initModules() {
     if (modules == null) {
@@ -59,20 +66,7 @@ public class HMTileEntity extends TileEntity {
   }
 
   @Override
-  public void invalidate() {
-    super.invalidate();
-    if (world.isRemote) {
-      onBreak();
-    }
-  }
-
-  @Override
-  protected void setWorldCreate(World worldIn) {
-    setWorld(worldIn);
-  }
-
-  @Override
-  public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+  public boolean hasCapability(Capability<?> capability, @Nullable Direction facing) {
     for (IModule module : modules) {
       if (module.hasCapability(capability, facing)) {
         return true;
@@ -81,9 +75,15 @@ public class HMTileEntity extends TileEntity {
     return false;
   }
 
+  @Nonnull
+  @Override
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap) {
+    return null;
+  }
+
   @Nullable
   @Override
-  public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+  public <T> T getCapability(Capability<T> capability, @Nullable Direction facing) {
     for (IModule module : modules) {
       T cap = module.getCapability(capability, facing);
       if (cap != null) {
@@ -98,93 +98,96 @@ public class HMTileEntity extends TileEntity {
     return 128 * 128;
   }
 
-  /**
-   * Send the TileEntity update packet to all player within 64 block radius
-   */
+  */
+/**
+   * Send the TileEntity update packet to all player within 64 blocks radius
+   *//*
+
   public void sendUpdateToNearPlayers() {
     if (world.isRemote) {
       return;
     }
-    SPacketUpdateTileEntity packet = getUpdatePacket();
+    SUpdateTileEntityPacket packet = getUpdatePacket();
     if (packet == null) {
       return;
     }
-    for (EntityPlayer playerEntity : world.playerEntities) {
-      EntityPlayerMP player = (EntityPlayerMP) playerEntity;
+    for (PlayerEntity playerEntity : world.getPlayers()) {
+      ServerPlayerEntity player = (ServerPlayerEntity) playerEntity;
       if (getDistanceSq(player.posX, playerEntity.posY, player.posZ) <= (64 * 64)) {
         player.connection.sendPacket(packet);
       }
     }
   }
 
-  public NBTTagCompound saveToPacket() {
+  public CompoundNBT saveToPacket() {
     return save();
   }
 
-  public void loadFromPacket(NBTTagCompound nbt) {
+  public void loadFromPacket(CompoundNBT nbt) {
     load(nbt);
   }
 
   @Nullable
   @Override
-  public SPacketUpdateTileEntity getUpdatePacket() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    nbt.setTag("packet", saveToPacket());
-    super.writeToNBT(nbt);
-    return new SPacketUpdateTileEntity(pos, 1, nbt);
+  public SUpdateTileEntityPacket getUpdatePacket() {
+    CompoundNBT nbt = new CompoundNBT();
+    nbt.put("packet", saveToPacket());
+    super.write(nbt);
+    return new SUpdateTileEntityPacket(pos, 1, nbt);
   }
 
   @Override
-  public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
-    NBTTagCompound nbt = pkt.getNbtCompound();
-    if (nbt.hasKey("packet")) {
-      loadFromPacket(nbt.getCompoundTag("packet"));
+  public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+    CompoundNBT nbt = pkt.getNbtCompound();
+    if (nbt.contains("packet")) {
+      loadFromPacket(nbt.getCompound("packet"));
     } else {
-      readFromNBT(nbt);
+      read(nbt);
     }
   }
 
   @Override
-  public NBTTagCompound getUpdateTag() {
-    return writeToNBT(new NBTTagCompound());
+  public CompoundNBT getUpdateTag() {
+    return write(new CompoundNBT());
   }
 
-  public NBTTagCompound save() {
-    NBTTagCompound list = new NBTTagCompound();
+  public CompoundNBT save() {
+    CompoundNBT list = new CompoundNBT();
 
     for (IModule module : modules) {
-      list.setTag(module.getName(), module.serializeNBT());
+      list.put(module.getName(), module.serializeNBT());
     }
 
     return list;
   }
 
-  public void load(NBTTagCompound list) {
+  public void load(CompoundNBT list) {
     for (IModule module : modules) {
-      module.deserializeNBT(list.getCompoundTag(module.getName()));
+      module.deserializeNBT(list.getCompound(module.getName()));
     }
   }
 
+
   @Override
-  public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-    compound.setTag("modules", save());
-    return super.writeToNBT(compound);
+  public CompoundNBT write(CompoundNBT compound) {
+    compound.put("modules", save());
+    return super.write(compound);
   }
 
   @Override
-  public void readFromNBT(NBTTagCompound compound) {
-    if (compound.hasKey("modules")) {
-      load(compound.getCompoundTag("modules"));
+  public void read(CompoundNBT compound) {
+    if (compound.contains("modules")) {
+      load(compound.getCompound("modules"));
     }
 
-    super.readFromNBT(compound);
+    super.read(compound);
   }
 
-  public Map<Integer, IVariable> getGuiSyncVariables() {
-    Map<Integer, IVariable> map = new HashMap<>();
+  public Map<Integer, IField<Object>> getGuiSyncVariables() {
+    Map<Integer, IField<Object>> map = new HashMap<>();
 
     for (IModule module : modules) {
-      for (Pair<Sync, IVariable> pair : RegistryUtil.getVariablesMarkedWithAnnotation(Sync.class, module)) {
+      for (Pair<Sync, IField<Object>> pair : RegistryUtil.getVariablesMarkedWithAnnotation(Sync.class, module)) {
         map.put(pair.getKey().id(), pair.getValue());
       }
     }
@@ -192,3 +195,4 @@ public class HMTileEntity extends TileEntity {
     return map;
   }
 }
+*/

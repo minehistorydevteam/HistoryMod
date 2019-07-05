@@ -41,6 +41,11 @@ public class InventoryView implements IItemHandler {
     return map;
   }
 
+  @Override
+  public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
+    return true;
+  }
+
   private int toSlot(int index) {
     return slotMap.get(index);
   }

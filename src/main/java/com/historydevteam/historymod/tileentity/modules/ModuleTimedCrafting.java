@@ -1,15 +1,17 @@
+/*
 package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.crafting.ICraftingProcess;
 import com.historydevteam.historymod.crafting.TimedCrafting;
-import com.historydevteam.historymod.crafting.energy.IEnergySource;
 import com.historydevteam.historymod.util.Reference;
 import com.historydevteam.historymod.util.Sync;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 
+*/
 /**
  * This module represents a crafting process that requires energy for a period of time until the process is complete
- */
+ *//*
+
 public class ModuleTimedCrafting extends AbstractModule {
 
   private TimedCrafting process;
@@ -62,16 +64,17 @@ public class ModuleTimedCrafting extends AbstractModule {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    nbt.setBoolean("isCrafting", isCrafting);
-    nbt.setTag("process", process.serializeNBT());
+  public CompoundNBT serializeNBT() {
+    CompoundNBT nbt = new CompoundNBT();
+    nbt.putBoolean("isCrafting", isCrafting);
+    nbt.put("process", process.serializeNBT());
     return nbt;
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     isCrafting = nbt.getBoolean("isCrafting");
-    process.deserializeNBT(nbt.getCompoundTag("process"));
+    process.deserializeNBT(nbt.get("process"));
   }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,3 +24,4 @@ public class SlotTakeOnly extends SlotItemHandler {
     return true;
   }
 }
+*/

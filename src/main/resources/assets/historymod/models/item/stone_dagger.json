@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/stone_dagger"
+    "layer0": "historymod:item/stone_dagger"
   }
 }

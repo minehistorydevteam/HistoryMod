@@ -1,24 +1,27 @@
+/*
 package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.tileentity.containers.Inventory;
 import com.historydevteam.historymod.tileentity.containers.InventoryView;
 import com.historydevteam.historymod.util.WorldUtils;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
+*/
 /**
  * This module wraps an inventory adding the following features
  * - Save/loading of the inventory contents
- * - Item drop when the block is mined
+ * - Item drop when the blocks is mined
  * - Provides access to the inventory contents using Capabilities
  * <p>
  * Note: don't include more than 1 inventory module,
  * instead use a bigger inventory with controlled access.
- */
+ *//*
+
 public class ModuleInventory extends AbstractModule {
 
   private Inventory inventory;
@@ -49,7 +52,7 @@ public class ModuleInventory extends AbstractModule {
   }
 
   @Override
-  public <T> T getCapability(Capability<T> cap, EnumFacing facing) {
+  public <T> T getCapability(Capability<T> cap, Direction facing) {
     if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
       //noinspection unchecked
       return view != null ? (T) view : (T) inventory;
@@ -63,12 +66,13 @@ public class ModuleInventory extends AbstractModule {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
+  public CompoundNBT serializeNBT() {
     return inventory.serializeNBT();
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
+  public void deserializeNBT(CompoundNBT nbt) {
     inventory.deserializeNBT(nbt);
   }
 }
+*/

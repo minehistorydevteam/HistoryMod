@@ -1,14 +1,15 @@
+/*
 package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.tileentity.HMTileEntity;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.INBTSerializable;
 
-public interface IModule extends INBTSerializable<NBTTagCompound> {
+public interface IModule extends INBTSerializable<CompoundNBT> {
 
   String getName();
 
@@ -41,20 +42,21 @@ public interface IModule extends INBTSerializable<NBTTagCompound> {
     // Called when the Block is mined
   }
 
-  default <T> T getCapability(Capability<T> cap, EnumFacing facing) {
+  default <T> T getCapability(Capability<T> cap, Direction facing) {
     return null;
   }
 
-  default boolean hasCapability(Capability<?> cap, EnumFacing facing) {
+  default boolean hasCapability(Capability<?> cap, Direction facing) {
     return getCapability(cap, facing) != null;
   }
 
-  default NBTTagCompound serializeNBT() {
+  default CompoundNBT serializeNBT() {
     // Override is optional, not all modules need to save data
-    return new NBTTagCompound();
+    return new CompoundNBT();
   }
 
-  default void deserializeNBT(NBTTagCompound nbt) {
+  default void deserializeNBT(CompoundNBT nbt) {
     // Override is optional, not all modules need to load data
   }
 }
+*/

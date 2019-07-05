@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"3": "historymod:blocks/firepit",
-		"particle": "historymod:blocks/firepit"
+		"3": "historymod:block/firepit",
+		"particle": "historymod:block/firepit"
 	},
 	"elements": [
 		{

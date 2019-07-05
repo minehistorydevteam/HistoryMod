@@ -1,48 +1,52 @@
+/*
 package com.historydevteam.historymod.gui;
 
 import com.historydevteam.historymod.proxy.network.HMNetworkManager;
 import com.historydevteam.historymod.tileentity.HMTileEntity;
 import com.historydevteam.historymod.util.IBD;
-import com.historydevteam.historymod.util.IVariable;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import com.historydevteam.historymod.util.IField;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 
 import java.util.*;
+import java.util.List;
 
 public abstract class HMContainer extends Container {
 
   public HMTileEntity tile;
-  protected EntityPlayer player;
+  protected PlayerEntity player;
   protected List<InventoryRegion> regions = new ArrayList<>();
   protected Map<Integer, Object> lastState = new HashMap<>();
 
-  public HMContainer(EntityPlayer player, HMTileEntity tile) {
+  public HMContainer(PlayerEntity player, HMTileEntity tile, ContainerType<? extends HMContainer> type, int id) {
+    super(type, id);
     this.tile = tile;
     this.player = player;
   }
 
-  public abstract HMGui createGui();
+  public abstract HMContainerScreen createGui();
 
   public void addPlayerSlots() {
     int playerInvStart = inventorySlots.size();
     for (int y = 0; y < 3; y++) {
       for (int x = 0; x < 9; x++) {
-        addSlotToContainer(new Slot(player.inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
+        addSlot(new Slot(player.inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18));
       }
     }
     int hotbarStart = inventorySlots.size();
     for (int x = 0; x < 9; x++) {
-      addSlotToContainer(new Slot(player.inventory, x, 8 + x * 18, 142));
+      addSlot(new Slot(player.inventory, x, 8 + x * 18, 142));
     }
     regions.add(new InventoryRegion(playerInvStart, playerInvStart + 26, false));
     regions.add(new InventoryRegion(hotbarStart, hotbarStart + 9, false));
   }
 
   @Override
-  public ItemStack transferStackInSlot(EntityPlayer playerIn, int index) {
+  public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
     if (index >= 0 && index < inventorySlots.size()) {
       Slot slot = inventorySlots.get(index);
 
@@ -71,12 +75,12 @@ public abstract class HMContainer extends Container {
 
   @Override
   public void detectAndSendChanges() {
-    if (tile != null && player instanceof EntityPlayerMP) {
-      Map<Integer, IVariable> map = tile.getGuiSyncVariables();
+    if (tile != null && player instanceof ServerPlayerEntity) {
+      Map<Integer, IField<Object>> map = tile.getGuiSyncVariables();
       IBD data = new IBD();
       int count = 0;
 
-      for (Map.Entry<Integer, IVariable> entry : map.entrySet()) {
+      for (Map.Entry<Integer, IField<Object>> entry : map.entrySet()) {
         Object lastValue = lastState.get(entry.getKey());
         Object currentValue = entry.getValue().getValue();
 
@@ -88,18 +92,18 @@ public abstract class HMContainer extends Container {
       }
 
       if (count > 0) {
-        HMNetworkManager.sendContainerUpdate((EntityPlayerMP) player, data);
+        HMNetworkManager.sendContainerUpdate((ServerPlayerEntity) player, data);
       }
     }
     super.detectAndSendChanges();
   }
 
-  public void receiveDataFromServer(IBD data) {
+  public void handleServerPacket(IBD data) {
     // Do nothing by default, subclasses must override
     if (tile != null) {
-      Map<Integer, IVariable> map = tile.getGuiSyncVariables();
+      Map<Integer, IField<Object>> map = tile.getGuiSyncVariables();
 
-      for (Map.Entry<Integer, IVariable> entry : map.entrySet()) {
+      for (Map.Entry<Integer, IField<Object>> entry : map.entrySet()) {
         data.withObject(entry.getKey(), value -> entry.getValue().setValue(value));
       }
     }
@@ -117,7 +121,8 @@ public abstract class HMContainer extends Container {
   }
 
   @Override
-  public boolean canInteractWith(EntityPlayer playerIn) {
+  public boolean canInteractWith(PlayerEntity playerIn) {
     return true;
   }
 }
+*/

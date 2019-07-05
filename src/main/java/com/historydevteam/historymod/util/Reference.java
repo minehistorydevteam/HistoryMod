@@ -1,7 +1,7 @@
 package com.historydevteam.historymod.util;
 
-import com.historydevteam.historymod.creativetab.HistoryModCreativeTabs;
-import net.minecraft.creativetab.CreativeTabs;
+import com.historydevteam.historymod.itemgroup.HistoryGroup;
+import net.minecraft.item.ItemGroup;
 
 public class Reference {
 
@@ -11,7 +11,7 @@ public class Reference {
   public static final String ACCEPTED_VERSIONS = "[1.12.2]";
   public static final String CLIENT_PROXY_CLASS = "com.historydevteam.historymod.proxy.ClientProxy";
   public static final String COMMON_PROXY_CLASS = "com.historydevteam.historymod.proxy.CommonProxy";
-  public static final CreativeTabs HISTORY_CREATIVE_TAB = new HistoryModCreativeTabs();
+  public static final ItemGroup HISTORY_ITEM_GROUP = new HistoryGroup();
   public static final int GUI_TILE_ENTITY = 1;
 
   public static final int SYNC_BURN_TIME = 0;

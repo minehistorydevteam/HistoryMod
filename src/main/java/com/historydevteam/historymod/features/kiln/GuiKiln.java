@@ -1,10 +1,11 @@
+/*
 package com.historydevteam.historymod.features.kiln;
 
-import com.historydevteam.historymod.gui.HMGui;
+import com.historydevteam.historymod.gui.HMContainerScreen;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiKiln extends HMGui {
+public class GuiKiln extends HMContainerScreen {
   private static final ResourceLocation TEXTURES = new ResourceLocation(Reference.MOD_ID + ":textures/gui/kiln.png");
 
   public GuiKiln(ContainerKiln container) {
@@ -29,3 +30,4 @@ public class GuiKiln extends HMGui {
     drawTexturedModalRect(guiLeft + 80, guiTop + 34, 177, 14, amount, 17);
   }
 }
+*/

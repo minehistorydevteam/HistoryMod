@@ -1,8 +1,8 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"4": "historymod:blocks/primitive_workbench",
-		"particle": "historymod:blocks/primitive_workbench"
+		"4": "historymod:block/primitive_workbench",
+		"particle": "historymod:block/primitive_workbench"
 	},
 	"elements": [
 		{

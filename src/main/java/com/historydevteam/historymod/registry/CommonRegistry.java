@@ -2,43 +2,46 @@ package com.historydevteam.historymod.registry;
 
 import com.historydevteam.historymod.util.RegistryUtil;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
+import net.minecraft.item.crafting.AbstractCookingRecipe;
+import net.minecraft.item.crafting.CookingRecipeSerializer;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.List;
 
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 public class CommonRegistry {
 
+  protected static final List<Block> BLOCKS_TO_REGISTER = RegistryUtil
+      .getObjectsFromStaticFields(Blocks.class, Block.class);
+
   @SubscribeEvent
-  public void addItems(RegistryEvent.Register<Item> event) {
-    List<Item> items = getItemsToRegister();
-    for (Block block : getBlocksToRegister()) {
-      items.add(Blocks.getItemBlock(block));
+  public static void addItems(RegistryEvent.Register<Item> event) {
+    List<Item> items = RegistryUtil.getObjectsFromStaticFields(Items.class, Item.class);
+    for(Block block : BLOCKS_TO_REGISTER) {
+      Item i = Blocks.getBlockItem(block);
+      if(!event.getRegistry().containsKey(i.getRegistryName())) items.add(i);
+      items.forEach(System.out::println);
     }
     items.forEach(event.getRegistry()::register);
   }
 
   @SubscribeEvent
-  public void addEntities(RegistryEvent.Register<EntityEntry> event) {
-    getEntitiesToRegister().forEach(event.getRegistry()::register);
+  public static void addEntities(RegistryEvent.Register<EntityType<?>> event) {
+    RegistryUtil.getObjectsFromStaticFields(Entities.class, EntityType.class)
+        .forEach(event.getRegistry()::register);
   }
 
   @SubscribeEvent
-  public void addBlocks(RegistryEvent.Register<Block> event) {
-    getBlocksToRegister().forEach(event.getRegistry()::register);
+  public static void addBlocks(RegistryEvent.Register<Block> event) {
+    BLOCKS_TO_REGISTER.forEach(event.getRegistry()::register);
   }
 
-  protected List<EntityEntry> getEntitiesToRegister() {
-    return RegistryUtil.getObjectsFromStaticFields(Entities.class, EntityEntry.class);
-  }
-
-  protected List<Block> getBlocksToRegister() {
-    return RegistryUtil.getObjectsFromStaticFields(Blocks.class, Block.class);
-  }
-
-  protected List<Item> getItemsToRegister() {
-    return RegistryUtil.getObjectsFromStaticFields(Items.class, Item.class);
-  }
+  @SubscribeEvent
+  public static void add(RegistryEvent.Register<CookingRecipeSerializer<AbstractCookingRecipe>> e){}
 }

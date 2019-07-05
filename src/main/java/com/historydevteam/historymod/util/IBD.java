@@ -2,6 +2,7 @@ package com.historydevteam.historymod.util;
 
 import com.google.common.base.Charsets;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -138,8 +139,8 @@ public class IBD {
     map.clear();
   }
 
-  public void fromBuffer(ByteBuf buf) {
-    clear();
+  public static IBD fromBuffer(PacketBuffer buf) {
+    IBD ibd = new IBD();
     int size = buf.readInt();
     for (int i = 0; i < size; i++) {
       byte type = buf.readByte();
@@ -147,13 +148,13 @@ public class IBD {
 
       //@formatter:off
       switch (type) {
-        case 0: setByte(key, buf.readByte()); break;
-        case 1: setShort(key, buf.readShort()); break;
-        case 2: setInteger(key, buf.readInt()); break;
-        case 3: setLong(key, buf.readLong()); break;
-        case 4: setFloat(key, buf.readFloat()); break;
-        case 5: setDouble(key, buf.readDouble()); break;
-        case 6: setBoolean(key, buf.readBoolean()); break;
+        case 0: ibd.setByte(key, buf.readByte()); break;
+        case 1: ibd.setShort(key, buf.readShort()); break;
+        case 2: ibd.setInteger(key, buf.readInt()); break;
+        case 3: ibd.setLong(key, buf.readLong()); break;
+        case 4: ibd.setFloat(key, buf.readFloat()); break;
+        case 5: ibd.setDouble(key, buf.readDouble()); break;
+        case 6: ibd.setBoolean(key, buf.readBoolean()); break;
         //@formatter:on
         case 7:
           int stringSize = (int) buf.readShort() & 0xFFFF;
@@ -163,7 +164,7 @@ public class IBD {
             chars[j] = buf.readByte();
           }
 
-          setString(key, new String(chars, Charsets.UTF_8));
+          ibd.setString(key, new String(chars, Charsets.UTF_8));
           break;
 
         case 8:
@@ -174,7 +175,7 @@ public class IBD {
             bytes[j] = buf.readByte();
           }
 
-          setByteArray(key, bytes);
+          ibd.setByteArray(key, bytes);
           break;
 
         case 9:
@@ -185,7 +186,7 @@ public class IBD {
             ints[j] = buf.readInt();
           }
 
-          setIntArray(key, ints);
+          ibd.setIntArray(key, ints);
           break;
 
         default:
@@ -193,6 +194,7 @@ public class IBD {
       }
 
     }
+    return ibd;
   }
 
   public void toBuffer(ByteBuf buf) {

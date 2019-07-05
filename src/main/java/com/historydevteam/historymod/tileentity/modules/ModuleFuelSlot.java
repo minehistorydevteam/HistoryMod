@@ -1,12 +1,12 @@
+/*
 package com.historydevteam.historymod.tileentity.modules;
 
-import com.historydevteam.historymod.crafting.energy.IEnergySource;
 import com.historydevteam.historymod.tileentity.containers.Inventory;
 import com.historydevteam.historymod.util.Reference;
 import com.historydevteam.historymod.util.Sync;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntityFurnace;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.FurnaceTileEntity;
 
 public class ModuleFuelSlot extends AbstractModule implements IEnergySource {
 
@@ -42,7 +42,7 @@ public class ModuleFuelSlot extends AbstractModule implements IEnergySource {
         return;
       }
 
-      int time = TileEntityFurnace.getItemBurnTime(stack);
+      int time = FurnaceTileEntity.func_214001_f().get(stack);
       if (time <= 0) {
         cooldown = 10;
         return;
@@ -84,18 +84,19 @@ public class ModuleFuelSlot extends AbstractModule implements IEnergySource {
   }
 
   @Override
-  public NBTTagCompound serializeNBT() {
-    NBTTagCompound nbt = new NBTTagCompound();
-    nbt.setInteger("burnTime", burnTime);
-    nbt.setInteger("maxBurnTime", maxBurnTime);
-    nbt.setInteger("cooldown", cooldown);
+  public CompoundNBT serializeNBT() {
+    CompoundNBT nbt = new CompoundNBT();
+    nbt.putInt("burnTime", burnTime);
+    nbt.putInt("maxBurnTime", maxBurnTime);
+    nbt.putInt("cooldown", cooldown);
     return nbt;
   }
 
   @Override
-  public void deserializeNBT(NBTTagCompound nbt) {
-    burnTime = nbt.getInteger("burnTime");
-    maxBurnTime = nbt.getInteger("maxBurnTime");
-    cooldown = nbt.getInteger("cooldown");
+  public void deserializeNBT(CompoundNBT nbt) {
+    burnTime = nbt.getInt("burnTime");
+    maxBurnTime = nbt.getInt("maxBurnTime");
+    cooldown = nbt.getInt("cooldown");
   }
 }
+*/

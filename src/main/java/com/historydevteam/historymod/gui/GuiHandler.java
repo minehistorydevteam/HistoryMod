@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.gui;
 
 import com.historydevteam.historymod.features.kiln.ContainerKiln;
@@ -40,3 +41,4 @@ public class GuiHandler implements IGuiHandler {
     return null;
   }
 }
+*/

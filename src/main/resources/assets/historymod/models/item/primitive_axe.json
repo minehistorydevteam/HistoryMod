@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "historymod:items/primitive_axe"
+    "layer0": "historymod:item/primitive_axe"
   }
 }

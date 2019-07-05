@@ -1,97 +1,84 @@
 package com.historydevteam.historymod.registry;
 
 import com.historydevteam.historymod.block.*;
-import com.historydevteam.historymod.features.kiln.BlockKiln;
+import com.historydevteam.historymod.item.PebbleItem;
 import com.historydevteam.historymod.util.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.OreBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
-
-import static com.historydevteam.historymod.registry.Items.QUARTZITE;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraftforge.common.ToolType;
 
 public class Blocks {
 
-  public static final Block POT_DARK = new HMBlock(Material.ROCK)
-      .setName("pot_dark")
+  public static final Block DARK_POT = new HMBlock(Block.Properties.create(Material.ROCK))
+      .setAABB(new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75, 0.625D, 0.75D))
       .hasModel()
-      .setAABB(new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75, 0.625D, 0.75D));
+      .setRegistryName(Reference.MOD_ID, "dark_pot");
 
-  public static final Block POT_LIGHT = new HMBlock(Material.ROCK)
-      .setName("pot_light")
+  public static final Block LIGHT_POT = new HMBlock(Block.Properties.create(Material.ROCK).lightValue(10).hardnessAndResistance(3f))
+      .setAABB(new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75, 0.625D, 0.75D))
       .hasModel()
-      .setLightEmission(10)
-      .setAABB(new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75, 0.625D, 0.75D));
+      .setRegistryName(Reference.MOD_ID, "light_pot");
 
-  public static final Block FLINT_ORE = new BlockFragileOre(Material.ROCK)
-      .setDrops(Items.FLINT, 4, 6)
-      .setName("flint_ore")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
-      .setHardness(3.0f);
+  public static final Block FLINT_ORE = IHarvestableBlock.setHarvestLevel(
+      ToolType.PICKAXE, HMBlock.HarvestLevel.WOOD, new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3f)))
+      .setRegistryName(Reference.MOD_ID, "flint_ore");
 
-  public static final Block QUARTZITE_ORE = new BlockFragileOre(Material.ROCK)
-      .setDrops(QUARTZITE, 4, 6)
-      .setName("quartzite_ore")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
-      .setHardness(3.0f);
+  public static final Block QUARTZITE_ORE = IHarvestableBlock.setHarvestLevel(
+      ToolType.PICKAXE, IHarvestableBlock.HarvestLevel.WOOD, new OreBlock(Block.Properties.create(Material.ROCK).hardnessAndResistance(3f)))
+      .setRegistryName(Reference.MOD_ID, "quartzite_ore");
 
-  public static final Block RACK = new BlockRotable(Material.ROCK)
-      .setName("rack")
-      .hasModel();
-
-  public static final Block WAX_CANDLE = new HMBlock(Material.WOOD)
-      .setName("wax_candle")
+  public static final Block RACK = new RotatableBlock(Block.Properties.create(Material.ROCK))
       .hasModel()
-      .setAABB(new AxisAlignedBB(3f / 16f, 0, 3f / 16f, 13f / 16f, 13f / 16f, 13f / 16f))
-      .setLightEmission(10);
+      .setRegistryName(Reference.MOD_ID, "rack");
 
-  public static final Block PEBBLES = new BlockPickable(Material.ROCK)
-      .setName("pebbles")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.HAND)
+  public static final Block WAX_CANDLE = new HMBlock(Block.Properties.create(Material.WOOD).lightValue(10))
       .hasModel()
-      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 14f / 16f, 0));
+      .setAABB(new AxisAlignedBB(3.5 / 16, 0, 3.5 / 16, 12.5 / 16, 13 / 16d, 12.5 / 16))
+      .setRegistryName("wax_candle");
 
-  public static final Block STICKS = new BlockPickable(Material.WOOD)
-      .setDrops(Items.STICK, 1, 1)
-      .setName("sticks")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.HAND)
+  public static final Block PEBBLES = new PickableBlock(Block.Properties.create(Material.ROCK))
+      .setItem(new PebbleItem(new Item.Properties()).setRegistryName(Reference.MOD_ID, "pebbles"))
+      .setHarvestLevel(ToolType.PICKAXE, HMBlock.HarvestLevel.HAND)
+      .setAABB(VoxelShapes.fullCube().getBoundingBox().contract(0, 14 / 16d, 0))
+      .setRegistryName(Reference.MOD_ID, "pebbles");
+
+  public static final Block STICKS = new PickableBlock(Block.Properties.create(Material.WOOD))
+      .setItem(Items.STICK)
+      .setHarvestLevel(ToolType.PICKAXE, HMBlock.HarvestLevel.HAND)
+      .setAABB(VoxelShapes.fullCube().getBoundingBox().contract(0, 15 / 16d, 0))
+      .setRegistryName(Reference.MOD_ID, "sticks");
+
+  public static final Block FIREPIT = new RotatableBlock(Block.Properties.create(Material.WOOD))
       .hasModel()
-      .setAABB(Block.FULL_BLOCK_AABB.contract(0, 15f / 16f, 0));
+      .setRegistryName(Reference.MOD_ID, "firepit");
 
-  public static final Block FIREPIT = new BlockRotable(Material.WOOD)
-      .setName("firepit")
-      .hasModel();
+  public static final Block UNFIRED_CLAY_KILN = new RotatableBlock(Block.Properties.create(Material.CLAY))
+      .setHarvestLevel(ToolType.PICKAXE, HMBlock.HarvestLevel.WOOD)
+      .setAABB(new AxisAlignedBB(1 / 8d, 0, 1 / 8d, 1 - (1 / 8d), 1d, 1 - (1/8d)))
+      .setRegistryName(Reference.MOD_ID, "unfired_clay_kiln");
 
-  public static final Block UNFIRED_CLAY_KILN = new BlockRotable(Material.CLAY)
-      .setName("unfired_clay_kiln")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.WOOD)
-      .hasModel()
-      .setHardness(4.0F);
-
-  public static final Block FIRED_CLAY_KILN = new BlockKiln(Material.ROCK)
+/*  public static final Block FIRED_CLAY_KILN = new KilnBlock(Block.Properties.create(Material.ROCK))
       .hasGui()
-      .setName("fired_clay_kiln")
-      .setHarvestLevel("pickaxe", HMBlock.HarvestLevel.STONE)
+      .setHarvestLevel(ToolType.PICKAXE, HMBlock.HarvestLevel.STONE)
+      .setRegistryName("fired_clay_kiln");*/
+
+  public static final Block PRIMITIVE_WORKBENCH = new HMBlock(Block.Properties.create(Material.WOOD))
       .hasModel()
-      .setHardness(5.0F);
+      .setRegistryName(Reference.MOD_ID, "primitive_workbench");
 
-  public static final Block PRIMITIVE_WORKBENCH = new HMBlock(Material.WOOD)
-      .setName("primitive_workbench")
-      .hasModel();
-
-  static ItemBlock getItemBlock(Block block) {
+  static Item getBlockItem(Block block) {
     return (block instanceof ISpecialItemBlock)
-        ? ((ISpecialItemBlock) block).getItemBlock()
-        : (ItemBlock) new ItemBlock(block).setRegistryName(block.getRegistryName());
-  }
-
-  private static Block create(Material material, String name, CreativeTabs tabs) {
-    return new Block(material)
-        .setCreativeTab(tabs)
-        .setTranslationKey(Reference.MOD_ID + "." + name)
-        .setRegistryName(new ResourceLocation(Reference.MOD_ID, name));
+        ? ((ISpecialItemBlock) block).getBlockItem()
+        : (BlockItem) new BlockItem(block, new Item.Properties().group(Reference.HISTORY_ITEM_GROUP))
+        .setRegistryName(block.getRegistryName());
   }
 }

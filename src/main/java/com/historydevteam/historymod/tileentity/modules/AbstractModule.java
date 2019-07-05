@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.tileentity.modules;
 
 import com.historydevteam.historymod.tileentity.HMTileEntity;
@@ -16,3 +17,4 @@ public abstract class AbstractModule implements IModule {
     tile = parent;
   }
 }
+*/

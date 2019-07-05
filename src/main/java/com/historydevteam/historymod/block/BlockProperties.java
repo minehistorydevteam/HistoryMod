@@ -1,19 +1,17 @@
 package com.historydevteam.historymod.block;
 
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.util.Direction;
+
+import java.util.EnumSet;
 
 public class BlockProperties {
 
-  // Horizontal Facing
-  public static final IProperty<EnumFacing> ORIENTATION =
-      PropertyEnum.create("orientation", EnumFacing.class, EnumFacing.HORIZONTALS);
 
   // All facings
-  public static final IProperty<EnumFacing> FACING =
-      PropertyEnum.create("facing", EnumFacing.class, EnumFacing.VALUES);
+  public static final DirectionProperty FACING =
+      DirectionProperty.create("facing", EnumSet.allOf(Direction.class));
 
-  public static final PropertyBool BURNING = PropertyBool.create("burning");
+  public static final BooleanProperty BURNING = BooleanProperty.create("burning");
 }

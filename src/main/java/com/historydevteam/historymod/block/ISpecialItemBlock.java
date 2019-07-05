@@ -1,7 +1,7 @@
 package com.historydevteam.historymod.block;
 
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.Item;
 
 public interface ISpecialItemBlock {
-  ItemBlock getItemBlock();
+  Item getBlockItem();
 }

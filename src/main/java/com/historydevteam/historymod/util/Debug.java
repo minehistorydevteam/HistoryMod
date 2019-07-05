@@ -1,3 +1,4 @@
+/*
 package com.historydevteam.historymod.util;
 
 import com.google.common.collect.Maps;
@@ -6,35 +7,36 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.client.AnvilConverterException;
+import net.minecraft.client.KeyboardListener;
 import net.minecraft.client.Minecraft;
-import net.minecraft.command.CommandBase;
+import net.minecraft.client.MouseHelper;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.ICommandSender;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.command.CommandSource;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.launchwrapper.Launch;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.EnumHand;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.util.Hand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Timer;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk;
-import net.minecraft.world.gen.ChunkProviderServer;
-import net.minecraft.world.storage.ISaveFormat;
+import net.minecraft.world.chunk.ServerChunkProvider;
+import net.minecraft.world.storage.SaveFormat;
 import net.minecraft.world.storage.WorldSummary;
-import net.minecraftforge.fml.client.FMLClientHandler;
-import net.minecraftforge.oredict.OreDictionary;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 
+import javax.swing.plaf.basic.BasicTreeUI;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -44,10 +46,10 @@ public class Debug {
   public static final boolean DEV_ENV = (boolean) Launch.blackboard.get("fml.deobfuscatedEnvironment");
 
   // To use this, add breakpoint in
-  // net.minecraft.inventory.ContainerWorkbench#onCraftMatrixChanged
+  // net.minecraft.inventory.container.WorkbenchContainer#onCraftMatrixChanged
   // and set the breakpoint condition to:
-  // "Debug.createRecipe(craftMatrix, player)"
-  public static boolean createRecipe(InventoryCrafting inv, EntityPlayer player) {
+  // "Debug.createRecipe(field_75162_e, player)"
+  public static boolean createRecipe(CraftingInventory inv, PlayerEntity player) {
     BufferedWriter writer = null;
 
     try {
@@ -62,10 +64,10 @@ public class Debug {
 
       for (int i = 0; i < inv.getHeight(); i++) {
         for (int j = 0; j < inv.getWidth(); j++) {
-          ItemStack item = inv.getStackInRowAndColumn(i, j);
+          ItemStack item = inv.getStackInSlot(i, j);
 
           if (!item.isEmpty()) {
-            JsonObject obj = deserializeToJsonWithOreDict(item);
+            JsonObject obj = deserializeToJsonWithTags(item);
 
             String c = map.get(obj);
             if (c == null) {
@@ -115,7 +117,7 @@ public class Debug {
         key.add(m.getValue(), m.getKey());
       }
 
-      ItemStack handItem = player.getHeldItem(EnumHand.MAIN_HAND);
+      ItemStack handItem = player.getHeldItem(Hand.MAIN_HAND);
 
       JsonObject obj = new JsonObject();
       obj.addProperty("type", "forge:ore_shaped");
@@ -126,7 +128,7 @@ public class Debug {
       Gson gson = new GsonBuilder().setPrettyPrinting().create();
       String jsonStr = gson.toJson(obj);
 
-      if (Keyboard.isKeyDown(Keyboard.KEY_C)) {
+      if () {
         File folder = new File("../src/main/resources/assets/historymod/recipes");
         String fileName = handItem.getTranslationKey()
             .replace(".name", "");
@@ -162,30 +164,29 @@ public class Debug {
     obj.addProperty("item", stack.getItem().getRegistryName().toString());
     obj.addProperty("count", stack.getCount());
 
-    if (stack.getHasSubtypes()) {
-      obj.addProperty("data", stack.getItemDamage());
+    if (stack.getDamage() != 0) {
+      obj.addProperty("data", stack.getDamage());
     }
 
-    if (stack.getTagCompound() != null) {
-      obj.addProperty("nbt", stack.getTagCompound().toString());
+    if (stack.getTag() != null) {
+      obj.addProperty("nbt", stack.getTag().toString());
     }
 
     return obj;
   }
 
-  public static JsonObject deserializeToJsonWithOreDict(ItemStack stack) {
+  public static JsonObject deserializeToJsonWithTags(ItemStack stack) {
     JsonObject obj = new JsonObject();
     if (stack.isEmpty()) return obj;
 
-    int[] ids = OreDictionary.getOreIDs(stack);
+    Collection<ResourceLocation> tags = ItemTags.getCollection().getOwningTags(stack.getItem());
 
-    if (ids.length < 1) {
+    if (tags.isEmpty()) {
       return deserializeToJson(stack);
     }
 
-    String name = OreDictionary.getOreName(ids[0]);
-    obj.addProperty("type", "forge:ore_dict");
-    obj.addProperty("ore", name);
+    obj.addProperty("type", "tag");
+    obj.addProperty("ore", tags.iterator().next().toString());
     obj.addProperty("count", stack.getCount());
 
     return obj;
@@ -194,35 +195,25 @@ public class Debug {
   public static class DebugCommand extends CommandBase {
 
     @Override
-    public String getName() {
-      return "hm-debug";
-    }
-
-    @Override
-    public String getUsage(ICommandSender sender) {
-      return "Debug utilities for HistoryMod, options: regenerate, ticks, reload";
-    }
-
-    @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void execute(MinecraftServer server, CommandSource sender, String[] args) throws CommandException {
       if (args.length < 1) {
-        sender.sendMessage(new TextComponentString("Missing order, try /hm-debug regenerate"));
+        sender.sendErrorMessage(new StringTextComponent("Missing order, try /hm-debug regenerate"));
         return;
       }
 
       if ("regenerate".equals(args[0])) {
-        regenChunks(sender, sender.getEntityWorld(), sender.getPosition());
+        regenChunks(sender, sender.getWorld(), sender.getPos());
 
       } else if ("ticks".equals(args[0])) {
         int tps = (args.length < 2) ? 20 : Integer.parseInt(args[1]);
         setTickPerSecond(tps);
 
       } else if ("reload".equals(args[0])) {
-        Minecraft.getMinecraft().addScheduledTask(() -> {
-          Mouse.setGrabbed(false);
-          FMLClientHandler.instance().refreshResources(res -> true);
+        Minecraft.getInstance(). -> {
+          Minecraft.getInstance().mouseHelper.ungrabMouse();
+          Minecraft.getInstance().func_213237_g().complete(null);
 
-          ISaveFormat isaveformat = Minecraft.getMinecraft().getSaveLoader();
+          SaveFormat isaveformat = Minecraft.getInstance().getSaveLoader();
           List<WorldSummary> list;
 
           try {
@@ -232,26 +223,26 @@ public class Debug {
           }
 
           Collections.sort(list);
-          net.minecraftforge.fml.client.FMLClientHandler.instance().tryLoadExistingWorld(null, list.get(0));
+          FMLClient.tryLoadExistingWorld(null, list.get(0));
         });
 
       } else {
 
-        sender.sendMessage(new TextComponentString("Unknown order, try /hm-debug regenerate"));
+        sender.sendErrorMessage(new StringTextComponent("Unknown order, try /hm-debug regenerate"));
       }
     }
   }
 
-  public static void regenChunks(ICommandSender sender, World world, BlockPos pos) {
-    ChunkProviderServer prov = (ChunkProviderServer) world.getChunkProvider();
-    sender.sendMessage(new TextComponentString("Regenerating 5x5 chunks"));
+  public static void regenChunks(CommandSource sender, World world, BlockPos pos) {
+    ServerChunkProvider prov = (ServerChunkProvider) world.getChunkProvider();
+    sender.sendFeedback(new StringTextComponent("Regenerating 5x5 chunks"), true);
 
     for (int i = -5; i <= 5; i++) {
       for (int j = -5; j <= 5; j++) {
         int chunkX = i + (pos.getX() >> 4);
         int chunkZ = j + (pos.getZ() >> 4);
 
-        Chunk chunk = prov.getLoadedChunk(chunkX, chunkZ);
+        Chunk chunk = world.getChunk(chunkX, chunkZ);
         if (chunk != null) {
 
 //          Chunk newTerrain = prov.chunkGenerator.generateChunk(chunkX, chunkZ);
@@ -264,21 +255,23 @@ public class Debug {
 //            }
 //          }
 
-          chunk.setTerrainPopulated(false);
+          chunk.set(false);
           chunk.populate(prov, prov.chunkGenerator);
         }
       }
     }
 
-    sender.sendMessage(new TextComponentString("done"));
+    sender.sendFeedback(new StringTextComponent("done"), true);
   }
 
-  /**
+  */
+/**
    * Changes the game's tps
    * Please, don't use this outside the dev environment
    *
    * @param tps number of ticks per second
-   */
+   *//*
+
   public static void setTickPerSecond(int tps) {
     if (tps < 1) {
       tps = 1;
@@ -287,7 +280,7 @@ public class Debug {
     try {
       Field timerField = Minecraft.class.getDeclaredField("timer");
       timerField.setAccessible(true);
-      Timer timer = (Timer) timerField.get(Minecraft.getMinecraft());
+      Timer timer = (Timer) timerField.get(Minecraft.getInstance());
 
       Field tickField = Timer.class.getDeclaredField("tickLength");
       tickField.setAccessible(true);
@@ -298,3 +291,4 @@ public class Debug {
     }
   }
 }
+*/

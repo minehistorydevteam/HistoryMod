@@ -1,23 +1,22 @@
 package com.historydevteam.historymod.registry;
 
-import com.historydevteam.historymod.entity.EntityPebble;
-import com.historydevteam.historymod.entity.EntityThrownSpear;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
+import com.historydevteam.historymod.entity.ThrownPebbleEntity;
+import com.historydevteam.historymod.entity.ThrownSpearEntity;
+import com.historydevteam.historymod.util.Reference;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 
+@SuppressWarnings("unchecked")
 public class Entities {
 
-  public static final EntityEntry THROWN_SPEAR = EntityEntryBuilder.create()
-      .entity(EntityThrownSpear.class)
-      .tracker(64, 10, true)
-      .name("thrown_spear")
-      .id("thrown_spear", 0)
-      .build();
+  public static final EntityType<ThrownSpearEntity> THROWN_SPEAR = (EntityType<ThrownSpearEntity>) EntityType.Builder.<ThrownSpearEntity>create(
+      EntityClassification.MISC).immuneToFire().setShouldReceiveVelocityUpdates(true)
+      .setTrackingRange(64).setUpdateInterval(1).size(0.5f, 0.5f).setCustomClientFactory((spawnEntity, world) -> new ThrownSpearEntity(world)).build("thrown_spear")
+      .setRegistryName(Reference.MOD_ID, "thrown_spear");
 
-  public static final EntityEntry THROWN_PEBBLE = EntityEntryBuilder.create()
-      .entity(EntityPebble.class)
-      .tracker(64, 10, true)
-      .name("pebble")
-      .id("pebble", 0)
-      .build();
+  public static final EntityType<ThrownPebbleEntity> THROWN_PEBBLE =
+      (EntityType<ThrownPebbleEntity>) EntityType.Builder.<ThrownPebbleEntity>create(
+      EntityClassification.MISC).immuneToFire().setShouldReceiveVelocityUpdates(true)
+      .setTrackingRange(64).setUpdateInterval(1).size(0.5f, 0.5f).setCustomClientFactory((spawnEntity, world) -> new ThrownPebbleEntity(world)).build("thrown_pebble")
+      .setRegistryName(Reference.MOD_ID, "thrown_pebble");
 }
