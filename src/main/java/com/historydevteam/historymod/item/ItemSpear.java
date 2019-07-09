@@ -110,7 +110,9 @@ public class ItemSpear extends Item {
           1.0F / (itemRand.nextFloat() * 0.4F + 1.2F) + (float) f * 0.5F);
 
       if (!entityplayer.capabilities.isCreativeMode) {
-        entityplayer.inventory.deleteStack(itemstack);
+        itemstack.setCount(itemstack.getCount()-1);
+        if(itemstack.getCount()==0)
+          entityplayer.inventory.deleteStack(itemstack);
       }
     }
 
@@ -118,9 +120,9 @@ public class ItemSpear extends Item {
 
   private static EntityThrownSpear createThrownSpear(World worldIn, ItemStack itemstack, EntityPlayer entityplayer) {
     EntityThrownSpear spear = new EntityThrownSpear(worldIn, entityplayer);
-    if (!entityplayer.capabilities.isCreativeMode) itemstack.damageItem(1, entityplayer);
 
     ItemStack itemToPickup = itemstack.copy();
+    if (!entityplayer.capabilities.isCreativeMode) itemToPickup.damageItem(1, entityplayer);
     itemToPickup.setCount(1);
     spear.setSpearItem(itemToPickup);
     return spear;
